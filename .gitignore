@@ -8,5 +8,3 @@ coverage/
 yarn-error.log
 test-report.xml
 .DS_Store
-src/metrics
-__tests__/unit/use-cases/CreateUserUseCase.test.ts

@@ -3,11 +3,11 @@ swagger:
   description: ""
   license: MIT
   version: "1.0.0"
-  basePath: api/
+  basePath: api/v1
   outputDirectory: ./docs
   outputFormat: OpenApi_3
   entryFile:
-    - ./src/**/controller/**/*
+    - ./src/**/controller/*
   produces: [ controller/json ]
   securityDefinitions:
     Authenticator:

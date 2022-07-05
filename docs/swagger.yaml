@@ -1,0 +1,87 @@
+openapi: 3.0.0
+info:
+    license:
+        name: MIT
+    title: api-metrics
+    version: 1.0.0
+paths:
+    /metrics:
+        post:
+            operationId: CreateMetricImpl
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    id:
+                                        type: string
+                                        description: ""
+                '503':
+                    description: 'SERVICE UNAVAILABLE'
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    error:
+                                        type: string
+                                        description: ""
+            description: ""
+            tags:
+                - Metrics
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/IMetric'
+                required: true
+        get:
+            operationId: FindAllMetricImpl
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/IMetric'
+                '503':
+                    description: 'SERVICE UNAVAILABLE'
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    error:
+                                        type: string
+                                        description: ""
+            description: ""
+            tags:
+                - Metrics
+servers:
+    -
+        url: api/v1
+components:
+    securitySchemes:
+        Authenticator:
+            type: apiKey
+            in: header
+            name: Authorization
+    schemas:
+        IMetric:
+            description: ""
+            properties:
+                name:
+                    type: string
+                    description: ""
+                value:
+                    type: string
+                    description: ""
+            type: object
+            required:
+                - name
+                - value

@@ -51,6 +51,16 @@ basePath: %{BASE_PATH}%; ex: /api/projectname
 
 Note: This basePath value must be igual to ```BASE_PATH```, into .env file
 
+### swagger make documentation
+
+```shelll
+  yarn swagger:gen
+```
+
+### show swagger
+```note
+/api/v1/docs
+```
 
 ## Run with environment file
 

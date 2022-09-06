@@ -2,6 +2,8 @@ import express, { Application } from 'express';
 import { urlencoded, json } from 'body-parser';
 import cors, { CorsOptions, CorsOptionsDelegate } from 'cors';
 import helmet from 'helmet';
+import swaggerUi from 'swagger-ui-express';
+import YAML from 'yamljs';
 import { Routes } from './routes';
 import { WinstonLogger } from '../logger';
 import { Mongoose } from '../mongoose/Mongoose';
@@ -20,6 +22,13 @@ class App {
   }
 
   private config(): void {
+    if (process.env.NODE_ENV !== 'production') {
+      this.server.use(
+        `${(this.BASE_PATH)}/docs`,
+        swaggerUi.serve,
+        swaggerUi.setup(YAML.load('./docs/swagger.yaml'), { })
+      );
+    }
     this.corsOptions = {
       origin:
         process.env.NODE_ENV === 'production' ? process.env.CORS_ORIGIN : '*',

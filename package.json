@@ -54,7 +54,7 @@
     "http-status": "^1.5.2",
     "mongoose": "^6.4.0",
     "morgan": "^1.10.0",
-    "swagger-ui-express": "^4.3.0",
+    "swagger-ui-express": "^4.5.0",
     "typescript-rest": "^3.0.4",
     "typescript-rest-swagger": "^1.1.7",
     "winston": "^3.7.2",

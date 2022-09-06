@@ -1,6 +1,7 @@
 version: '3.7'
 services:
   node:
+    container_name: app
     env_file:
     - .env
     build:
@@ -16,7 +17,7 @@ services:
     volumes:
       - ./:/app
     ports:
-      - "3108:3000"
+      - "8000:8000"
 
   mongodb:
     container_name: mongodb

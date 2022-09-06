@@ -30,6 +30,17 @@ services:
     ports:
       - "27017:27017"
 
+  mongo_seed:
+    container_name: mongo_seed
+    image: mongo
+    links:
+      - mongodb
+    networks:
+      - database
+    volumes:
+      - ./mongo-seed:/mongo-seed
+    command: mongoimport --host mongodb --db metrics --collection metrics --type json --file /mongo-seed/git gigiigigigigigigmetrics.json --jsonArray
+
 networks:
   backend:
     name: backend

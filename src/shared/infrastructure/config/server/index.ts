@@ -6,12 +6,12 @@ import swaggerUi from 'swagger-ui-express';
 import YAML from 'yamljs';
 import { Routes } from './routes';
 import { WinstonLogger } from '../logger';
-import { Mongoose } from '../mongoose/Mongoose';
-
+import { Postgres } from '../postgres/Postgres';
+import "reflect-metadata"
 class App {
   public server: Application;
   public appRoutes: Routes = new Routes();
-  public database: Mongoose = new Mongoose();
+  public database: Postgres = new Postgres();
   public log: WinstonLogger = new WinstonLogger();
   private BASE_PATH: string = process.env.BASE_PATH || '/api';
   private corsOptions: CorsOptions | CorsOptionsDelegate | undefined;
@@ -50,6 +50,6 @@ class App {
 export default new App().server.listen(
   Number(process.env.PORTSERVER) || 3000,
   () => {
-    log.info(`Server listening port: ${process.env.PORTSERVER}`);
+    log.info(`Server listening port: ${process.env.PORTSERVER} `);
   },
 );

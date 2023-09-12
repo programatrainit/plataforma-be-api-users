@@ -1,38 +1,41 @@
 import { Router } from 'express';
 import { VersionHealth } from '../../../../../version';
 // import { MetricRepository } from '../../../../../metrics/infrastructure/persistence/mongoose/MetricRepository';
-import {UsercRepository} from '../../../../../Users/infrastructure/persistence/Postgres/UserRepository'
+import {UsersRepository} from '../../../../../Users/infrastructure/persistence/Postgres/UserRepository'
 // import { CreateMetricUseCase } from '../../../../../metrics/application/use-case/CreateMetricUseCase';
 import {CreateUserUseCase} from '../../../../../Users/application/use-case/CreateUserUseCase'
  import { CreateUserController } from '../../../../../Users/infrastructure/controller/CreateUserController';
 // import { IMetricCreate } from '../../../../../metrics/application/use-case/interface/IMetricCreate';
-// import { IMetricFindAll } from '../../../../../metrics/application/use-case/interface/IMetricFindAll';
+import { IUserFindAll } from '../../../../../Users/application/use-case/interface/IUsersFindAll';
 import {IUserCreate} from '../../../../../Users/application/use-case/interface/IUserCreate'
-// import { FindAllMetricUseCase } from '../../../../../metrics/application/use-case/FindAllMetricUseCase';
-// import { FindAllMetricController } from '../../../../../metrics/infrastructure/controller/FindAllMetricController';
+import {FindAllUsersUseCase  } from '../../../../../Users/application/use-case/FindAllMetricUseCase';
+import { FindAllUserController } from '../../../../../Users/infrastructure/controller/FindAllUserController';
+import { User } from '../../../../../Users/infrastructure/persistence/Postgres/model/UserModel';
+
+
 
 export class Routes {
+
   public router: Router;
   private versionHealth: VersionHealth;
-  private userRepository: UsercRepository = new UsercRepository();
-
+  private userRepository: UsersRepository = new UsersRepository(User);
   private createUserUseCase: IUserCreate = new CreateUserUseCase(this.userRepository);
-  //  private findAllMetricUseCase: IMetricFindAll = new FindAllMetricUseCase(this.metricRepository);
+   private findAllMetricUseCase: IUserFindAll = new FindAllUsersUseCase(this.userRepository);
 
    private createUserController: CreateUserController;
-  // private findAllMetricController: FindAllMetricController;
+  private findAllUserController: FindAllUserController;
 
   constructor() {
     this.router = Router();
     this.versionHealth = new VersionHealth();
      this.createUserController = new CreateUserController(this.createUserUseCase);
-    // this.findAllMetricController = new FindAllMetricController(this.findAllMetricUseCase);
+    this.findAllUserController = new FindAllUserController(this.findAllMetricUseCase);
   }
 
   public routes(): Router {
     this.router.get('/health', this.versionHealth.run);
-     this.router.post('/Users', this.createUserController.run);
-    // this.router.get('/metrics', this.findAllMetricController.run);
+     this.router.post('/users', this.createUserController.run);
+    this.router.get('/users', this.findAllUserController.run);
 
     return this.router;
   }

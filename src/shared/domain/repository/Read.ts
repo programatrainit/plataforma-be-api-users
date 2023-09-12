@@ -7,3 +7,4 @@ export interface Read {
     options?: QueryOptions<Document<any, any, any>>
   ): Promise<V | Array<V>>;
 }
+

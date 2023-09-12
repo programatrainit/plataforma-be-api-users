@@ -1,5 +1,5 @@
-import { IMetric } from '../../../domain/entity/IMetric';
+import { IUser } from '../../../domain/entity/IUser';
 
 export interface IMetricFindAll {
-  findAll(): Promise<Array<IMetric>>;
+  findAll(): Promise<Array<IUser>>;
 }

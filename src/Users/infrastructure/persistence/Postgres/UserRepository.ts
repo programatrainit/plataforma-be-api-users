@@ -18,9 +18,22 @@ export class UsercRepository
     return { id};
   }
 
-  // async findAllMetric(): Promise<Array<IUser>> {
-  //   const response = await super.find<any, IUser>({});
+  async findAllUsers(): Promise<Array<IUser>> {
+    const response = await super.find<IUser>();
 
-  //   return response;
+    return response;
+  }
+
+  // async findAUser(id: number): Promise<{ user: IUser; }> {
+  //   //logic
+  //   return response
   // }
+
+  async updateUser(id: number, updatedUserData: IUser): Promise<void> {
+    //Escribir la logica
+  }
+
+  async deleteUser(id: number): Promise<void> {
+    //aqui tambien bro jeje
+  }
 }

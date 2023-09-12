@@ -1,4 +1,4 @@
-import {IUser} from '../../domain/entity/IUser'
+import { IUser } from '../../domain/entity/IUser'
 import { IUserCreate } from './interface/IUserCreate';
 import { UserWriteRepository } from '../../domain/repository/UserWriteRepository';
 

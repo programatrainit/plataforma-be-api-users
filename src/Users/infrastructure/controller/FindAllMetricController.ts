@@ -1,11 +1,11 @@
 import { Request, Response as Resp } from 'express';
 import httpStatus from 'http-status';
-import { GET, Path, POST } from 'typescript-rest';
+import { GET, Path } from 'typescript-rest';
 import { Response, Tags } from 'typescript-rest-swagger';
 import { IBaseController } from '../../../shared/infrastructure/controllers/IBaseController';
 import { ErrorHandler } from '../../../shared/domain/service/ErrorHandler';
 import { IMetricFindAll } from '../../application/use-case/interface/IMetricFindAll';
-import { IMetric } from '../../domain/entity/IMetric';
+import { IUser } from '../../domain/entity/IUser';
 
 @Path('/metrics')
 export class FindAllMetricController implements IBaseController {
@@ -27,9 +27,9 @@ export class FindAllMetricController implements IBaseController {
 
   @GET
   @Tags('Metrics')
-  @Response<Array<IMetric>>(200, 'OK')
+  @Response<Array<IUser>>(200, 'OK')
   @Response<{ error: string; }>(503, 'SERVICE UNAVAILABLE')
-  protected async impl(): Promise<Array<IMetric>> {
+  protected async impl(): Promise<Array<IUser>> {
     return this.useCase.findAll();
   }
 }

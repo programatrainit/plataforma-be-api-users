@@ -1,8 +1,9 @@
-import {BaseEntity, DataSource , } from  'typeorm'
- import { Write } from '../../../domain/repository/Write';
+import {BaseEntity, DataSource , Repository } from  'typeorm'
+import { Write } from '../../../domain/repository/Write';
 import { Read } from '../../../domain/repository/Read';
 import { type } from 'os';
 import { User } from 'Users/infrastructure/persistence/Postgres/model/UserModel'; 
+
 
 
 export class TyOrmBaseRepository implements Write{
@@ -13,10 +14,10 @@ export class TyOrmBaseRepository implements Write{
 
   constructor(schemaModel: BaseEntity) {
     this._model = schemaModel;
-    // this._userRepository = this._dataModel.getRepository(schemaModel);
+    // this._userRepository = this._dataModel.getRepository();
   }
 
-   create< V>(body: any ): Promise<V> {
+  create< V>(body: any ): Promise<V> {
     return new Promise<V>(async (resolve, reject) => {
       
         if(body == undefined){
@@ -25,12 +26,11 @@ export class TyOrmBaseRepository implements Write{
          
         }else{
           log.info(`TyOrmBaseRepository  , body : ${body}`)
-          this._model.save(...body)
+          this._model = body
+          this._model.save()
           log.info(`Database response ${JSON.stringify(body)}`);
           resolve(body as unknown as V);
         }
-
-
 
       // log.info(` body : ${JSON.stringify(body)}`)
       // let save = await this._model.save(body);
@@ -47,6 +47,12 @@ export class TyOrmBaseRepository implements Write{
       //   }
       // });
     });
+  }
+  
+  find<V>(): Promise<V[]> {
+    return new Promise<V[]>(async (resolve, reject)=>{
+      
+    })
   }
 
   // update<T, V>(

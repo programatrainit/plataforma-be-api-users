@@ -9,5 +9,6 @@ export interface Write {
   //   options?: QueryOptions,
   // ): Promise<V>;
 
+  find<V>(): Promise<V[]>
 
 }

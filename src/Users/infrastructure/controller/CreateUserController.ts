@@ -8,7 +8,7 @@ import {IUserCreate } from '../../application/use-case/interface/IUserCreate';
 import { User } from '../persistence/Postgres/model/UserModel'
 import { type } from 'os';
 
-@Path('/User')
+@Path('/user')
 export class CreateUserController implements IBaseController {
   private readonly useCase: IUserCreate;
   // // private  users : User;
@@ -45,3 +45,4 @@ export class CreateUserController implements IBaseController {
     return this.useCase.create(body);
   }
 }
+

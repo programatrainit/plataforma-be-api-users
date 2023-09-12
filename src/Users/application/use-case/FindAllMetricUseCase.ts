@@ -1,4 +1,4 @@
-import { IMetric } from '../../domain/entity/IMetric';
+import { IUser } from '../../domain/entity/IUser';
 import { IMetricFindAll } from './interface/IMetricFindAll';
 import { MetricReadRepository } from '../../domain/repository/MetricReadRepository';
 
@@ -7,8 +7,8 @@ export class FindAllMetricUseCase implements IMetricFindAll {
     this.repo = repo;
   }
 
-  findAll(): Promise<Array<IMetric>> {
-    const response = this.repo.findAllMetric();
+  findAll(): Promise<Array<IUser>> {
+    const response = this.repo.findAllUsers();
 
     return response;
   }

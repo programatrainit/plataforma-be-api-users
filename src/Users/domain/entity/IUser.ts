@@ -1,5 +1,5 @@
 export interface IUser {
-  id: number;
+  id: string;
   nombre: string;
   apellido: string;
   email: string;
@@ -8,4 +8,6 @@ export interface IUser {
   likedin_url: string;
   created_at: Date;
   updated_at: Date;
+  
 }
+

@@ -1,9 +1,9 @@
 import { IUser } from '../../domain/entity/IUser';
-import { IMetricFindAll } from './interface/IMetricFindAll';
-import { MetricReadRepository } from '../../domain/repository/MetricReadRepository';
+import { IUserFindAll } from './interface/IUsersFindAll';
+import {UsersReadRepository} from '../../domain/repository/UsersReadRepository'
 
-export class FindAllMetricUseCase implements IMetricFindAll {
-  constructor(private repo: MetricReadRepository) {
+export class FindAllUsersUseCase implements IUserFindAll {
+  constructor(private repo:UsersReadRepository) {
     this.repo = repo;
   }
 

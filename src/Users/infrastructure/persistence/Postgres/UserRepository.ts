@@ -24,4 +24,15 @@ export class UsersRepository
 
     return response;
   }
+
+
+  async findOneUser(id: string): Promise<IUser> {
+    const response = await super.findOne<string, IUser>(id);
+    if (response === undefined) {
+      throw new Error(`User con ID ${id} no encontrado`);
+    }
+    
+    log.info(`Funcion UserRepository ${JSON.stringify(response)}`);
+    return response;
+  }
 }

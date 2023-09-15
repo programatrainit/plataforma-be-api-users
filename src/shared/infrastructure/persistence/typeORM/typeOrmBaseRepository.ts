@@ -14,7 +14,7 @@ export class TyOrmBaseRepository implements Write , Read{
       this._model= model
   }
 
-   create<T, V>(body: T ): Promise<V> {
+  create<T, V>(body: T ): Promise<V> {
     return new Promise<V>(async (resolve, reject) => {
         if(body == undefined){
           log.error(`Database error is  ${body}`);
@@ -39,12 +39,6 @@ export class TyOrmBaseRepository implements Write , Read{
         
         }
     });
-  }
-  
-  find<V>(): Promise<V[]> {
-    return new Promise<V[]>(async (resolve, reject)=>{
-      
-    })
   }
 
   // update<T, V>(
@@ -88,7 +82,41 @@ export class TyOrmBaseRepository implements Write , Read{
             log.error(`Database error ${this._model}`);
             reject();
           }
-        },);
-    }
+      },);
   }
+
+  findOne<T, V>(id: T): Promise<V | undefined> {
+    return new Promise<V | undefined>(async(resolve, reject) => {
+  
+      if(typeof this._model === typeof BaseEntity){
+
+        const user: ObjectLiteral | null = await
+        Postgres
+        .db
+        .getRepository(this._model)
+        .findOne({
+          where: {
+            id: id
+          }
+        });
+        log.info(`variable de user with ${user}`)
+        
+        if (user !== null) {
+          log.info(`Database response with ${JSON.stringify(user)}`);
+          resolve(user as V);
+        } else {
+          resolve(undefined);
+        }
+        
+      } else {
+        log.error(`Database error ${this._model}`);
+        reject();
+      }
+    })
+  }
+
+
+}
+
+
 

@@ -1,5 +1,5 @@
 import {IUser} from '../../../domain/entity/IUser'
 
 export interface IUserCreate {
-  create(body: IUser): Promise<{id: number}>;
+  create(body: IUser): Promise<string>;
 }

@@ -21,7 +21,7 @@ export class CreateUserController implements IBaseController {
     const id  = randomUUID()
     const {nombre , apellido , email ,cv_bucket_url,likedin_url ,github_url }  = req.body;
 
-      log.info(`valores de  nombre ${nombre}`);
+      // log.info(`valores de  nombre ${nombre}`);
 //====== Creacion de Usuario con IUser ======
     const user : IUser ={
       id : Object.freeze(id)  ,
@@ -48,9 +48,9 @@ export class CreateUserController implements IBaseController {
 
   @POST
   @Tags('Users')
-  @Response<{id: number}>(200, 'OK')
+  @Response<string>(201, 'CREATED')
   @Response<{ error: string; }>(503, 'SERVICE UNAVAILABLE')
-  protected async impl(body: IUser): Promise<{id : number}> { 
+  protected async impl(body: IUser): Promise<string> { 
        
     return this.useCase.create(body);
   }

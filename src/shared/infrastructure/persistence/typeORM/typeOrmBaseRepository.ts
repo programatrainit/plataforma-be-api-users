@@ -2,11 +2,13 @@ import {BaseEntity, ObjectLiteral } from  'typeorm'
 import { Write } from '../../../domain/repository/Write';
 import { Postgres } from '../../config/postgres/Postgres';
 import {Read} from '../../../domain/repository/Read'
+import {CreateDTO} from '../../../domain/entity/dto/CreateDTO'
 
 
 
 export class TyOrmBaseRepository implements Write , Read{
   private _model:any;
+  private  createDto : CreateDTO ;
 
 
 // se hace una injeccion de dependencias para poder utilizar el modelo 
@@ -14,7 +16,7 @@ export class TyOrmBaseRepository implements Write , Read{
       this._model= model
   }
 
-   create<T, V>(body: T ): Promise<V> {
+  create<T, V>(body: T ): Promise<V> {
     return new Promise<V>(async (resolve, reject) => {
         if(body == undefined){
           log.error(`Database error is  ${body}`);
@@ -28,8 +30,10 @@ export class TyOrmBaseRepository implements Write , Read{
               .db
               .getRepository(this._model)
               .save(body);
-              log.info(`Database response ${JSON.stringify(body)}`);
-              resolve(body  as V);
+              // log.info(`Database response ${JSON.stringify(body)}`);
+              this.createDto = { messages : "user successfully created"};
+
+              resolve(this.createDto.messages as V);
           }
           else
           {
@@ -67,14 +71,14 @@ export class TyOrmBaseRepository implements Write , Read{
   find<T, V>(): Promise<Array<V>> {
     return new Promise<Array<V>>((resolve, reject) => {
 
-          if (typeof this._model == typeof BaseEntity) {
+        if (typeof this._model == typeof BaseEntity) {
             const users :  Promise<Array<ObjectLiteral>> =
             Postgres
             .db
             .getRepository(this._model)
             .find();
             users.then( users => resolve(users as Array<V>))
-            log.info(`Database response ${users}`);
+            log.info(`Database response : Find users`);
             // resolve((users as unknown) as Array<V>);
             // log.error(`Database error ${err}`);
             // reject(err);
@@ -82,7 +86,7 @@ export class TyOrmBaseRepository implements Write , Read{
             log.error(`Database error ${this._model}`);
             reject();
           }
-        },);
-    }
+    });
   }
+}
 

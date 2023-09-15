@@ -7,7 +7,7 @@ export class CreateUserUseCase implements IUserCreate {
     this.repo = repo;
   }
 
-  create(body: IUser): Promise<{id: number}> {
+  create(body: IUser): Promise< string > {
     const response = this.repo.createUser(body);
     
     return response;

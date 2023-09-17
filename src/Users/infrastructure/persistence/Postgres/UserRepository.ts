@@ -32,7 +32,16 @@ export class UsersRepository
       throw new Error(`User con ID ${id} no encontrado`);
     }
     
-    log.info(`Funcion UserRepository ${JSON.stringify(response)}`);
+    // log.info(`Funcion UserRepository ${JSON.stringify(response)}`);
+    return response;
+  }
+
+  async deleteUser(id: string): Promise<string> {
+    const response = await super.delete<string, string>(id);
+    if (response === undefined) {
+      throw new Error(`User con ID ${id} no encontrado`);
+    }
+
     return response;
   }
 }

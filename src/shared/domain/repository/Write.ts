@@ -9,4 +9,6 @@ export interface Write {
   //   options?: QueryOptions,
   // ): Promise<V>;
 
+  delete<T,V>(id: T):Promise<V | string>;
+
 }

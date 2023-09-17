@@ -2,6 +2,7 @@ import {BaseEntity, ObjectLiteral } from  'typeorm'
 import { Write } from '../../../domain/repository/Write';
 import { Postgres } from '../../config/postgres/Postgres';
 import {Read} from '../../../domain/repository/Read'
+import { emitWarning } from 'process';
 
 
 
@@ -114,6 +115,38 @@ export class TyOrmBaseRepository implements Write , Read{
       }
     })
   }
+
+
+  delete<T, V>(id: T): Promise<V | string> {
+    return new Promise<V | string>(async (resolve, reject) => {
+      if (typeof this._model === typeof BaseEntity) {
+        try {
+          const result = await 
+          Postgres
+          .db
+          .getRepository(this._model)
+          .delete({
+            id: id
+          });
+
+          if (result.affected === 0) {
+            log.info("No se encontró ningún registro con el ID especificado.");
+          } else {
+            const deleted = `Registro con ID ${id} eliminado el `+ new Date().toISOString();
+            resolve(deleted as string);
+            
+          }
+  
+        } catch (error) {
+          reject(error);
+        }
+      } else {
+        log.error(`Database error ${this._model}`);
+        reject(id);
+      }
+    });
+  }
+  
 
 
 }

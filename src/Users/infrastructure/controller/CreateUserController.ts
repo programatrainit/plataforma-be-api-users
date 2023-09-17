@@ -19,7 +19,7 @@ export class CreateUserController implements IBaseController {
   run = async (req: Request, res: Resp): Promise<void> => {
     
     const id  = randomUUID()
-    const {nombre , apellido , email ,cv_bucket_url,likedin_url ,github_url }  = req.body;
+    const {nombre , apellido , email ,cv_bucket_url,linkedin_url ,github_url }  = req.body;
 
       // log.info(`valores de  nombre ${nombre}`);
 //====== Creacion de Usuario con IUser ======
@@ -29,7 +29,7 @@ export class CreateUserController implements IBaseController {
       apellido :apellido,
       email : email,
       cv_bucket_url: cv_bucket_url,
-      likedin_url:likedin_url,
+      linkedin_url:linkedin_url,
       github_url:github_url,
       created_at:new Date(),
       updated_at: new Date()

@@ -32,7 +32,7 @@ export class User extends BaseEntity  {
   github_url: string;
 
   @Column({length:250})
-  likedin_url: string;
+  linkedin_url: string;
 
   @CreateDateColumn()
   created_at: Date;

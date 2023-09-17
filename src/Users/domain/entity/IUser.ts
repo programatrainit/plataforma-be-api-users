@@ -5,7 +5,7 @@ export interface IUser {
   email: string;
   cv_bucket_url: string;
   github_url: string;
-  likedin_url: string;
+  linkedin_url: string;
   created_at: Date;
   updated_at: Date;
   

@@ -8,6 +8,4 @@ export interface Write {
   //   update: UpdateQuery<T>,
   //   options?: QueryOptions,
   // ): Promise<V>;
-
-
 }

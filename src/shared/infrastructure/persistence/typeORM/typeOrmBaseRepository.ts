@@ -3,12 +3,14 @@ import { Write } from '../../../domain/repository/Write';
 import { Postgres } from '../../config/postgres/Postgres';
 import {Read} from '../../../domain/repository/Read'
 import {CreateDTO} from '../../../domain/entity/dto/CreateDTO'
+import { UseCaseBaseResponse } from '../../../domain/repository/UseCaseBaseResponse';
 
 
 
 export class TyOrmBaseRepository implements Write , Read{
   private _model:any;
-  private  createDto : CreateDTO ;
+  private _createDto : CreateDTO ;
+
 
 
 // se hace una injeccion de dependencias para poder utilizar el modelo 
@@ -31,9 +33,9 @@ export class TyOrmBaseRepository implements Write , Read{
               .getRepository(this._model)
               .save(body);
               // log.info(`Database response ${JSON.stringify(body)}`);
-              this.createDto = { messages : "user successfully created"};
+              this._createDto = { messages : "user successfully created"};
 
-              resolve(this.createDto.messages as V);
+              resolve(this._createDto.messages as V);
           }
           else
           {
@@ -88,5 +90,7 @@ export class TyOrmBaseRepository implements Write , Read{
           }
     });
   }
+
+
 }
 

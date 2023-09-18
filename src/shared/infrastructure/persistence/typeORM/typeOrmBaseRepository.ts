@@ -21,7 +21,7 @@ export class TyOrmBaseRepository implements Write , Read{
   create<T, V>(body: T ): Promise<V> {
     return new Promise<V>(async (resolve, reject) => {
         if(body == undefined){
-          log.error(`Database error is  ${body}`);
+          log.error(`Database error , the body is undefined ${JSON.stringify(body)}`);
           reject(body);
          
         }else{
@@ -39,7 +39,7 @@ export class TyOrmBaseRepository implements Write , Read{
           }
           else
           {
-            log.error(`Database error is  ${this._model}`);
+            log.error(`Database error , the model  is not an accepted model ${this._model}`);
             reject(body);
           }
         
@@ -80,7 +80,7 @@ export class TyOrmBaseRepository implements Write , Read{
             .getRepository(this._model)
             .find();
             users.then( users => resolve(users as Array<V>))
-            log.info(`Database response : Find users`);
+            // log.info(`Database response : Find users`);
             // resolve((users as unknown) as Array<V>);
             // log.error(`Database error ${err}`);
             // reject(err);

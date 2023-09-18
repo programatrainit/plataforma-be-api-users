@@ -1,4 +1,4 @@
 export interface UpdateDTO {
-  numbersInsert: number;
-  numbersModified: number;
+  updateUserId: string | any ;
+  dateModified: number | Date | string; 
 }

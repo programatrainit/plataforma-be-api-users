@@ -3,6 +3,7 @@ import { Write } from '../../../domain/repository/Write';
 import { Postgres } from '../../config/postgres/Postgres';
 import {Read} from '../../../domain/repository/Read'
 import {CreateDTO} from '../../../domain/entity/dto/CreateDTO'
+import {UpdateDTO} from '../../../domain/entity/dto/UpdateDTO'
 import { UseCaseBaseResponse } from '../../../domain/repository/UseCaseBaseResponse';
 
 
@@ -10,6 +11,7 @@ import { UseCaseBaseResponse } from '../../../domain/repository/UseCaseBaseRespo
 export class TyOrmBaseRepository implements Write , Read{
   private _model:any;
   private _createDto : CreateDTO ;
+private _updateDTO : UpdateDTO;
 
 
 
@@ -47,28 +49,49 @@ export class TyOrmBaseRepository implements Write , Read{
     });
   }
 
-  // update<T, V>(
-  //   query: FilterQuery<T>,
-  //   update: UpdateQuery<T>,
-  //   options?: QueryOptions,
-  // ): Promise<V> {
-  //   return new Promise<V>((resolve, reject) => {
-  //     this._model.updateOne(
-  //       query,
-  //       update,
-  //       options,
-  //       (err: CallbackError, res: Document) => {
-  //         if (err) {
-  //           log.error(`Database error ${err}`);
-  //           reject(err);
-  //         } else {
-  //           log.info(`Database response ${JSON.stringify(res)}`);
-  //           resolve(res as unknown as V);
-  //         }
-  //       },
-  //     );
-  //   });
-  // }
+  update<T , S , V>(body: T , id : S ): Promise<V> {
+    return new Promise<V>(async (resolve, reject) => {
+      if(body == undefined ){
+
+        log.error(`Database error is resquest invalid ${body}`);
+        reject(body);
+
+      }
+      else{
+          if(typeof this._model == typeof BaseEntity && id != undefined ){
+
+                const userExist = await Postgres.db.getRepository(this._model).findOne({
+                  where: {
+                    id: id
+                  }
+                }); 
+
+                // log.info(` usuario existe ${userExist}`);
+
+            if (userExist != null ){
+                await  Postgres
+                .db
+                .getRepository(this._model)
+                .update(id , body);
+                this._updateDTO = {
+                  updateUserId: id,
+                  dateModified : new Date()
+                }
+
+                resolve( this._updateDTO as V);
+            }
+            else{
+              log.error(`id does not exist ${id}`);
+              reject(body)
+            }
+          }
+          else {
+            log.error(` error in model   ${this._model}`);
+            reject(body);
+          }
+      }
+    });
+  }
 
   find<T, V>(): Promise<Array<V>> {
     return new Promise<Array<V>>((resolve, reject) => {
@@ -85,7 +108,7 @@ export class TyOrmBaseRepository implements Write , Read{
             // log.error(`Database error ${err}`);
             // reject(err);
           } else {
-            log.error(`Database error ${this._model}`);
+            log.error(`error in model    ${this._model}`);
             reject();
           }
     });

@@ -2,7 +2,7 @@ import { info } from 'winston';
 import { TyOrmBaseRepository } from '../../../../shared/infrastructure/persistence/typeORM/typeOrmBaseRepository';
 import { UserWriteRepository } from '../../../domain/repository/UserWriteRepository';
 import { UsersReadRepository } from '../../../domain/repository/UsersReadRepository';
-import { IUser } from 'Users/domain/entity/IUser';
+import { IUser } from '../../../domain/entity/IUser';
 
 export class UsersRepository
   extends TyOrmBaseRepository
@@ -20,6 +20,14 @@ export class UsersRepository
     const response = await super.find<any, IUser>();
 
     return response;
+  }
+
+   async updateUser(body: IUser , id :string): Promise<Object> {
+
+    const response =  await  super.update<IUser , string , object>( body , id);
+
+    return response;
+    
   }
 
 }

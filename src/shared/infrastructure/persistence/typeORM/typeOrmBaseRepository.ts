@@ -1,13 +1,14 @@
 import {BaseEntity, ObjectLiteral } from  'typeorm'
 import { Write } from '../../../domain/repository/Write';
 import { Postgres } from '../../config/postgres/Postgres';
-import {Read} from '../../../domain/repository/Read'
-import { emitWarning } from 'process';
+import {Read} from '../../../domain/repository/Read';
+import { DeleteDTO } from '../../../domain/entity/dto/DeleteDTO';
 
 
 
 export class TyOrmBaseRepository implements Write , Read{
   private _model:any;
+  private _deleteDTO: DeleteDTO;
 
 
 // se hace una injeccion de dependencias para poder utilizar el modelo 
@@ -42,28 +43,6 @@ export class TyOrmBaseRepository implements Write , Read{
     });
   }
 
-  // update<T, V>(
-  //   query: FilterQuery<T>,
-  //   update: UpdateQuery<T>,
-  //   options?: QueryOptions,
-  // ): Promise<V> {
-  //   return new Promise<V>((resolve, reject) => {
-  //     this._model.updateOne(
-  //       query,
-  //       update,
-  //       options,
-  //       (err: CallbackError, res: Document) => {
-  //         if (err) {
-  //           log.error(`Database error ${err}`);
-  //           reject(err);
-  //         } else {
-  //           log.info(`Database response ${JSON.stringify(res)}`);
-  //           resolve(res as unknown as V);
-  //         }
-  //       },
-  //     );
-  //   });
-  // }
 
   find<T, V>(): Promise<Array<V>> {
     return new Promise<Array<V>>((resolve, reject) => {
@@ -132,8 +111,9 @@ export class TyOrmBaseRepository implements Write , Read{
           if (result.affected === 0) {
             log.info("No se encontró ningún registro con el ID especificado.");
           } else {
-            const deleted = `Registro con ID ${id} eliminado el `+ new Date().toISOString();
-            resolve(deleted as string);
+            this._deleteDTO = {message: `Registro con ID ${id} eliminado correctamente el `+ new Date().toISOString()}
+            // const deleted = `Registro con ID ${id} eliminado el `+ new Date().toISOString();
+            resolve(this._deleteDTO.message as string);
             
           }
   

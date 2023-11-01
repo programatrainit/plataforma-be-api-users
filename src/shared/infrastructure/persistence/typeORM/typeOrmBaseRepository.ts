@@ -5,6 +5,7 @@ import {Read} from '../../../domain/repository/Read'
 import {CreateDTO} from '../../../domain/entity/dto/CreateDTO'
 import {UpdateDTO} from '../../../domain/entity/dto/UpdateDTO'
 import { UseCaseBaseResponse } from '../../../domain/repository/UseCaseBaseResponse';
+import { emitWarning } from 'process';
 
 
 
@@ -111,9 +112,73 @@ private _updateDTO : UpdateDTO;
             log.error(`error in model    ${this._model}`);
             reject();
           }
-    });
+      },);
+  }
+
+  findOne<T, V>(id: T): Promise<V | undefined> {
+    return new Promise<V | undefined>(async(resolve, reject) => {
+  
+      if(typeof this._model === typeof BaseEntity){
+
+        const user: ObjectLiteral | null = await
+        Postgres
+        .db
+        .getRepository(this._model)
+        .findOne({
+          where: {
+            id: id
+          }
+        });
+        log.info(`variable de user with ${user}`)
+        
+        if (user !== null) {
+          log.info(`Database response with ${JSON.stringify(user)}`);
+          resolve(user as V);
+        } else {
+          resolve(undefined);
+        }
+        
+      } else {
+        log.error(`Database error ${this._model}`);
+        reject();
+      }
+    })
   }
 
 
+  delete<T, V>(id: T): Promise<V | string> {
+    return new Promise<V | string>(async (resolve, reject) => {
+      if (typeof this._model === typeof BaseEntity) {
+        try {
+          const result = await 
+          Postgres
+          .db
+          .getRepository(this._model)
+          .delete({
+            id: id
+          });
+
+          if (result.affected === 0) {
+            log.info("No se encontró ningún registro con el ID especificado.");
+          } else {
+            const deleted = `Registro con ID ${id} eliminado el `+ new Date().toISOString();
+            resolve(deleted as string);
+            
+          }
+  
+        } catch (error) {
+          reject(error);
+        }
+      } else {
+        log.error(`Database error ${this._model}`);
+        reject(id);
+      }
+    });
+  }
+  
+
+
 }
+
+
 

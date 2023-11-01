@@ -55,3 +55,4 @@ export class CreateUserController implements IBaseController {
     return this.useCase.create(body);
   }
 }
+

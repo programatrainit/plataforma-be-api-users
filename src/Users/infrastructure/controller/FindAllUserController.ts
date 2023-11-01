@@ -1,6 +1,6 @@
 import { Request, Response as Resp } from 'express';
 import httpStatus from 'http-status';
-import { GET, Path, POST } from 'typescript-rest';
+import { GET, Path } from 'typescript-rest';
 import { Response, Tags } from 'typescript-rest-swagger';
 import { IBaseController } from '../../../shared/infrastructure/controllers/IBaseController';
 import { ErrorHandler } from '../../../shared/domain/service/ErrorHandler';

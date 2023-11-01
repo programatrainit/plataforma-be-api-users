@@ -29,11 +29,14 @@ export class Routes {
    private findAllMetricUseCase: IUserFindAll = new FindAllUsersUseCase(this.userRepository);
   private findOneUserUseCase: IUserFindOne = new FindOneUserUseCase(this.userRepository);
   private deleteUserUseCase: IUserDelete = new DeleteUserUseCase(this.userRepository);
+  private updateUserUseCase:IUserUpdate = new UpdateUserUseCase(this.userRepository);
 
   private createUserController: CreateUserController;
   private findAllUserController: FindAllUserController;
   private findOneUserController: FindOneUserController;
   private deleteUserController: DeleteUserController;
+  private updateUserConstroller: UpdateUserConstroller; 
+
 
   constructor() {
     this.router = Router();
@@ -42,6 +45,7 @@ export class Routes {
     this.findAllUserController = new FindAllUserController(this.findAllMetricUseCase);
     this.findOneUserController = new FindOneUserController(this.findOneUserUseCase);
     this.deleteUserController = new DeleteUserController(this.deleteUserUseCase);
+    this.updateUserConstroller = new UpdateUserConstroller(this.updateUserUseCase);
   }
 
   public routes(): Router {
@@ -50,6 +54,7 @@ export class Routes {
     this.router.get('/users', this.findAllUserController.run);
     this.router.get('/users/:id', this.findOneUserController.run);
     this.router.delete('/users/:id', this.deleteUserController.run);
+    this.router.put('/users', this.updateUserConstroller.run);
 
     return this.router;
   }

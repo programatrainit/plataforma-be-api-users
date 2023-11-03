@@ -5,7 +5,7 @@ import * as packageJSON from '../../package.json';
 
 export class VersionHealth implements IBaseController {
   run = async (req: Request, res: Response): Promise<void> => {
-    log.info("controllador de docker VersionHealth funcionanado ")
+    log.info('controllador de docker VersionHealth funcionanado');
     try {
       const version = {
         app: packageJSON.name,

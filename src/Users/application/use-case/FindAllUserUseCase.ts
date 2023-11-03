@@ -1,10 +1,9 @@
 import { IUser } from '../../domain/entity/IUser';
 import { IUserFindAll } from './interface/IUsersFindAll';
-// import { IUserFindOne } from './interface/IUsersFindOne';
-import {UsersReadRepository} from '../../domain/repository/UsersReadRepository'
+import { UsersReadRepository } from '../../domain/repository/UsersReadRepository';
 
 export class FindAllUsersUseCase implements IUserFindAll {
-  constructor(private repo:UsersReadRepository) {
+  constructor(private repo: UsersReadRepository) {
     this.repo = repo;
   }
 
@@ -13,6 +12,4 @@ export class FindAllUsersUseCase implements IUserFindAll {
 
     return response;
   }
-
-  
 }

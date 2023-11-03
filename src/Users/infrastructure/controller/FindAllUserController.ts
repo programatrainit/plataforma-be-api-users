@@ -5,10 +5,10 @@ import { Response, Tags } from 'typescript-rest-swagger';
 import { IBaseController } from '../../../shared/infrastructure/controllers/IBaseController';
 import { ErrorHandler } from '../../../shared/domain/service/ErrorHandler';
 import { IUserFindAll } from '../../application/use-case/interface/IUsersFindAll';
-import { IUser } from '../../domain/entity/IUser'
+import { IUser } from '../../domain/entity/IUser';
 
 @Path('/users')
-export class FindAllUserController implements IBaseController  {
+export class FindAllUserController implements IBaseController {
   private readonly useCase: IUserFindAll;
 
   constructor(useCase: IUserFindAll) {

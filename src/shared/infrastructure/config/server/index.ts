@@ -14,6 +14,9 @@ class App {
   public server: Application;
   // public appRoutes: Routes = new Routes();
   public userRoutes: UserRoutes = new UserRoutes();
+    // implemetar rutas de rol ^
+    //                         |
+    //implementar rutas de module 
   public database: Postgres = new Postgres();
   public log: WinstonLogger = new WinstonLogger();
   private BASE_PATH: string = process.env.BASE_PATH || '/api';

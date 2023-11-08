@@ -9,7 +9,7 @@ import { IModuleCreate } from '../../application/use-case/interface/ IModuleCrea
 import { IModule } from '../../domain/entity/IModule';
 
 @Path('/modules') // Ruta para crear modulos
-export class CreateUserController implements IBaseController {
+export class CreateModuleController implements IBaseController {
   private readonly useCase: IModuleCreate;
 
   constructor(useCase: IModuleCreate) {
@@ -18,19 +18,19 @@ export class CreateUserController implements IBaseController {
 
   run = async (req: Request, res: Resp): Promise<void> => {
     const id = randomUUID();
-    const { nombre, description } = req.body;
+    const { name, description } = req.body;
 
     // ====== Creacion de Module siguiendo la interfaz IModule ======
-    const user: IModule = {
+    const module: IModule = {
       id: Object.freeze(id),
-      nombre,
+      name,
       description,
       created_at: new Date(),
       updated_at: new Date(),
     };
 
     try {
-      const response = await this.impl(user);
+      const response = await this.impl(module);
       res.status(httpStatus.OK).json(response);
     } catch (error) {
       ErrorHandler.catch(error as Record<any, any>, res);

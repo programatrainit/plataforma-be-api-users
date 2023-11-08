@@ -8,14 +8,14 @@ import {
 } from 'typeorm';
 
 @Entity()
-export class User extends BaseEntity {
+export class Module extends BaseEntity {
   @PrimaryColumn({ length: 100 })
     id: string;
 
   @Column({ length: 50 })
-    nombre: string;
+    name: string;
 
-  @Column({ length: 50 })
+  @Column({ length: 300 })
     description: string;
 
   @CreateDateColumn()

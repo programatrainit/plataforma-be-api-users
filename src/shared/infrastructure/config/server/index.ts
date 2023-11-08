@@ -6,6 +6,7 @@ import swaggerUi from 'swagger-ui-express';
 import YAML from 'yamljs';
 // import { Routes } from './routes';
 import { UserRoutes } from './routes/user.routes';
+import { ModuleRoutes } from './routes/module.routes';
 import { WinstonLogger } from '../logger';
 import { Postgres } from '../postgres/Postgres';
 import 'reflect-metadata';
@@ -14,9 +15,10 @@ class App {
   public server: Application;
   // public appRoutes: Routes = new Routes();
   public userRoutes: UserRoutes = new UserRoutes();
-    // implemetar rutas de rol ^
-    //                         |
-    //implementar rutas de module 
+  public moduleRoutes: ModuleRoutes = new ModuleRoutes();
+  // implemetar rutas de rol ^
+  //                         |
+  // implementar rutas de module
   public database: Postgres = new Postgres();
   public log: WinstonLogger = new WinstonLogger();
   private BASE_PATH: string = process.env.BASE_PATH || '/api';
@@ -49,6 +51,7 @@ class App {
     this.server.use(helmet.frameguard({ action: 'deny' }));
     // this.server.use(this.BASE_PATH, this.appRoutes.routes()); // Ruta general
     this.server.use(this.BASE_PATH, this.userRoutes.routes()); // Ruta de usuarios
+    this.server.use(this.BASE_PATH, this.moduleRoutes.routes()); // Ruta de modulos
     this.log.initializer();
     this.database.connection();
   }

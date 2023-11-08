@@ -1,4 +1,4 @@
-import { IModule } from '../entity/ IModule';
+import { IModule } from '../entity/IModule';
 
 export interface ModuleWriteRepository {
   createModule(body: IModule): Promise<string>; // Crea un módulo

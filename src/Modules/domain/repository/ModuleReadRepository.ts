@@ -1,6 +1,6 @@
-import { IModule } from '../entity/ IModule';
+import { IModule } from '../entity/IModule';
 
-export interface UsersReadRepository {
-  findAllUsers(): Promise<Array<IModule>>;
-  findOneUser(id: string): Promise<IModule>;
+export interface ModuleReadRepository {
+  findAllModules(): Promise<Array<IModule>>;
+  findOneModule(id: string): Promise<IModule>;
 }

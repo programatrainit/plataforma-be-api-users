@@ -1,6 +1,7 @@
 import { DataSource } from 'typeorm';
 import 'dotenv/config';
 import { User } from '../../../../Users/infrastructure/persistence/Postgres/model/UserModel';
+import { Module } from '../../../../Modules/infrastructure/persistence/postgres/model/ModuleModel';
 
 export class Postgres {
   // se modifico la variable db es static para poder utilizar el contexto de DataSource
@@ -13,7 +14,7 @@ export class Postgres {
     database: `${process.env.POSTGRES_DB}`,
     synchronize: true,
     logging: true,
-    entities: [User],
+    entities: [User, Module],
     subscribers: [],
     migrations: [],
   });

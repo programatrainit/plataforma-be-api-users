@@ -28,7 +28,7 @@ export class TyOrmBaseRepository implements Write, Read {
       if (typeof this._model === typeof BaseEntity) {
         Postgres.db.getRepository(this._model).save(body as any).then();
         // log.info(`Database response ${JSON.stringify(body)}`);
-        this._createDto = { messages: 'user successfully created' };
+        this._createDto = { messages: 'record created successfully' };
 
         resolve(this._createDto.messages as V);
       } else {

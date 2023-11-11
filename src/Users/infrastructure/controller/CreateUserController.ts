@@ -7,7 +7,6 @@ import { IBaseController } from '../../../shared/infrastructure/controllers/IBas
 import { ErrorHandler } from '../../../shared/domain/service/ErrorHandler';
 import { IUserCreate } from '../../application/use-case/interface/IUserCreate';
 import { IUser } from '../../domain/entity/IUser';
-import { IUrol } from '../../domain/entity/IUser';
 
 @Path('/users')
 export class CreateUserController implements IBaseController {
@@ -23,7 +22,7 @@ export class CreateUserController implements IBaseController {
 
     // log.info(`valores de  nombre ${nombre}`);
     // ====== Creacion de Usuario con IUser ======
-    const user: IUrol = {
+    const user: IUser = {
       id: Object.freeze(id),
       nombre,
       apellido,

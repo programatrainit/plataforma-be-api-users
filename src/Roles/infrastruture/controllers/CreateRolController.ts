@@ -14,7 +14,7 @@ export class CreateRolController implements IBaseController {
     this.useCase = useCase;
   }
 
-  run = async (req: Request, res: Res,next:any): Promise<void> => {
+  run = async (req: Request, res: Res): Promise<void> => {
     const id = randomUUID();
     const { name, description } = req.body;
     const rol:IUrol = {
@@ -24,20 +24,16 @@ export class CreateRolController implements IBaseController {
       created_at: new Date(),
       updated_at: new Date(),
     };
-    console.log(rol, '<<<----------------------------'); 
-    console.log('Entre bien');
-
     try {
       const response = await this.impl(rol);
       res.status(httpStatus.OK).json(response);
     } catch (error) {
       ErrorHandler.catch(error as Record<any, any>, res);
-      next(error);
     }
   };
 
   @POST
-  @Tags('Users')
+  @Tags('Rol')
   @Response<string>(201, 'CREATED')
   @Response<{ error: string }>(503, 'SERVICE UNAVAILABLE')
   protected async impl(body: IUrol): Promise<string> {

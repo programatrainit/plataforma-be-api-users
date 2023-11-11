@@ -14,7 +14,7 @@ export class Rol extends BaseEntity {
     id: string;
 
   @Column({ length: 50 })
-    nombre: string;
+    name: string;
 
   @Column({ length: 255 })
     description: string;

@@ -1,6 +1,6 @@
 import { RolWriteRepository } from '../../domain/repository/RolWriteRepository';
 import { IUrol } from '../../domain/entity/IRol';
-import { IURolCreate } from './interface/IRolCreate';
+import { IURolCreate } from './interface/IURolCreate';
 
 export class CreateRolUseCase implements IURolCreate {
   constructor(private respositoryImpl: RolWriteRepository) {

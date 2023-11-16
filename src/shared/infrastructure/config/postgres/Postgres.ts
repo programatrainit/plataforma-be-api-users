@@ -7,7 +7,7 @@ export class Postgres {
   // se modifico la variable db es static para poder utilizar el contexto de DataSource
   static db: DataSource = new DataSource({
     type: 'postgres',
-    host: 'postgres',
+    host: 'localhost',
     port: 5432,
     username: `${process.env.POSTGRES_USER}`,
     password: `${process.env.POSTGRES_PASSWORD}`,

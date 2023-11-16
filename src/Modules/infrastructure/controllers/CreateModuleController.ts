@@ -5,7 +5,7 @@ import { Response, Tags } from 'typescript-rest-swagger';
 import { randomUUID } from 'crypto';
 import { IBaseController } from '../../../shared/infrastructure/controllers/IBaseController';
 import { ErrorHandler } from '../../../shared/domain/service/ErrorHandler';
-import { IModuleCreate } from '../../application/use-case/interface/ IModuleCreate';
+import { IModuleCreate } from '../../application/use-case/interface/IModuleCreate';
 import { IModule } from '../../domain/entity/IModule';
 
 @Path('/modules') // Ruta para crear modulos

@@ -1,11 +1,18 @@
-export interface IUser {
-  id: string;
-  nombre: string;
-  apellido: string;
-  email: string;
-  cv_bucket_url: string;
-  github_url: string;
-  linkedin_url: string;
-  created_at: Date;
-  updated_at: Date;
+import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
+
+@Entity()
+export class User {
+
+    @PrimaryGeneratedColumn()
+    id: number
+
+    @Column()
+    primerNombre: string
+
+    @Column()
+    lastName: string
+
+    @Column()
+    age: number
+
 }

@@ -1,39 +1,32 @@
-import {
-  Column,
-  Entity,
-  PrimaryGeneratedColumn,
-  CreateDateColumn,
-  UpdateDateColumn,
-  BaseEntity,
-  PrimaryColumn,
-} from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
-@Entity()
-export class User extends BaseEntity {
-  @PrimaryColumn({ length: 100 })
-    id: string;
+@Entity({ name: "users" })
+export class User {
 
-  @Column({ length: 50 })
-    nombre: string;
+    @PrimaryGeneratedColumn()
+    id: number;
 
-  @Column({ length: 50 })
-    apellido: string;
+    @Column({ length: 25, nullable: false })
+    username: string;
 
-  @Column({ length: 250 })
+    @Column({ length: 25, nullable: false })
+    password: string;
+
+    @Column({ length: 25, nullable: false, unique: true })
     email: string;
 
-  @Column({ length: 300 })
+    @Column({ length: 25, nullable: true })
     cv_bucket_url: string;
 
-  @Column({ length: 250 })
+    @Column({ length: 25, nullable: true })
     github_url: string;
 
-  @Column({ length: 250 })
+    @Column({ length: 25, nullable: true })
     linkedin_url: string;
 
-  @CreateDateColumn()
+    @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
     created_at: Date;
 
-  @UpdateDateColumn()
+    @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP", onUpdate: "CURRENT_TIMESTAMP" })
     updated_at: Date;
 }

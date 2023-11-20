@@ -1,18 +1,32 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
-@Entity()
+@Entity({ name: "users" })
 export class User {
 
     @PrimaryGeneratedColumn()
-    id: number
+    id: number;
 
-    @Column()
-    primerNombre: string
+    @Column({ length: 25, nullable: false })
+    username: string;
 
-    @Column()
-    lastName: string
+    @Column({ length: 25, nullable: false })
+    password: string;
 
-    @Column()
-    age: number
+    @Column({ length: 25, nullable: false, unique: true })
+    email: string;
 
+    @Column({ length: 25, nullable: true })
+    cv_bucket_url: string;
+
+    @Column({ length: 25, nullable: true })
+    github_url: string;
+
+    @Column({ length: 25, nullable: true })
+    linkedin_url: string;
+
+    @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
+    created_at: Date;
+
+    @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP", onUpdate: "CURRENT_TIMESTAMP" })
+    updated_at: Date;
 }

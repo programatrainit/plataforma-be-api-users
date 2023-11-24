@@ -9,7 +9,7 @@ export class RolRepository extends TyOrmBaseRepository implements RolWriteReposi
     const msgDeleteRol = await super.update<Body, string, object>(dataToUpdate.body, dataToUpdate.id);
     return msgDeleteRol;
   }
-
+ 
   async deleteRol(id: string): Promise<string> {
     const msgDeleteRol = await super.delete<string, string>(id);
     return msgDeleteRol;

@@ -9,6 +9,7 @@ import { CreateRolController } from '../../../../../Roles/infrastruture/controll
 import { DeleteRolController } from '../../../../../Roles/infrastruture/controllers/DeleteRolController';
 import { UpdateRolController } from '../../../../../Roles/infrastruture/controllers/UpdateRolController';
 
+
 export class RolRoutes {
   private router = Router();
   private rolRepository = new RolRepository(Rol);
@@ -29,7 +30,6 @@ export class RolRoutes {
     this.router.post('/rol', this.createRolcontroller.run);
     this.router.delete('/rol', this.deleteRolcontroller.run);
     this.router.put('/rol', this.updateRolcontroller.run);
-
     return this.router;
   }
 }

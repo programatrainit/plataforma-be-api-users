@@ -50,8 +50,9 @@ class App {
     this.server.use(helmet.hidePoweredBy());
     this.server.use(helmet.frameguard({ action: 'deny' }));
     // this.server.use(this.BASE_PATH, this.appRoutes.routes()); // Ruta general
-    this.server.use(this.BASE_PATH, this.rolRoutes.routes());// Ruta de usuarios
-    this.server.use(this.BASE_PATH, this.userRoutes.routes()); // Ruta de roles
+
+    this.server.use(this.BASE_PATH, this.rolRoutes.routes());// Ruta de rol
+    this.server.use(this.BASE_PATH, this.userRoutes.routes()); // Ruta de usuarios
     this.server.use(this.BASE_PATH, this.moduleRoutes.routes()); // Ruta de modulos
     this.log.initializer();
     this.database.connection();

@@ -3,7 +3,7 @@ import { Exception } from './Exception';
 
 export abstract class BusinessErrorHandler {
   public static createException(error: Error): Exception {
-    if (error.name === 'MongoError') {
+    if (error.name === 'PostgresError') {
       error.message = httpStatus['503_NAME'];
 
       return new Exception(httpStatus.SERVICE_UNAVAILABLE, error.message);

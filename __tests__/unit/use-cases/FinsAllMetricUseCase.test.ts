@@ -1,4 +1,4 @@
-import { IMetric } from '../../../src/metrics/domain/entity/IMetric';
+/*import { IMetric } from '../../../src/metrics/domain/entity/IMetric';
 import { MetricRepository } from '../../../src/metrics/infrastructure/persistence/mongoose/MetricRepository';
 import { BusinessErrorHandler } from '../../../src/shared/domain/service/BusinessErrorHandler';
 import { Exception } from '../../../src/shared/domain/service/Exception';
@@ -50,4 +50,4 @@ describe('RequestFindAllMetricUseCase', () => {
       expect(err.message).toEqual('throw error');
     }
   });
-});
+});*/

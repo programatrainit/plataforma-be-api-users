@@ -30,7 +30,7 @@ export class TyOrmBaseRepository implements Write, Read {
         // log.info(`Database response ${JSON.stringify(body)}`);
         this._createDto = { messages: 'record created successfully' };
 
-        resolve(this._createDto.messages as V);
+        resolve(this._createDto.messages as unknown as V);
       } else {
         log.error(`Database error is  ${this._model}`);
         reject(body);
@@ -55,7 +55,7 @@ export class TyOrmBaseRepository implements Write, Read {
             dateModified: new Date(),
           };
 
-          resolve(this._updateDTO as V);
+          resolve(this._updateDTO as unknown as V);
         } else {
           log.error(`id does not exist ${id}`);
           reject(body);

@@ -17,13 +17,8 @@ class App {
   // public appRoutes: Routes = new Routes();
   public userRoutes: UserRoutes = new UserRoutes();
   public rolRoutes:RolRoutes = new RolRoutes();
-    // implemetar rutas de rol ^
-    //                         |
-    //implementar rutas de module 
   public moduleRoutes: ModuleRoutes = new ModuleRoutes();
-  // implemetar rutas de rol ^
-  //                         |
-  // implementar rutas de module
+  
   public database: Postgres = new Postgres();
   public log: WinstonLogger = new WinstonLogger();
   private BASE_PATH: string = process.env.BASE_PATH || '/api';
@@ -56,7 +51,7 @@ class App {
     this.server.use(helmet.frameguard({ action: 'deny' }));
     // this.server.use(this.BASE_PATH, this.appRoutes.routes()); // Ruta general
 
-    this.server.use(this.BASE_PATH, this.rolRoutes.routes());// Ruta de usuarios
+    this.server.use(this.BASE_PATH, this.rolRoutes.routes());// Ruta de rol
     this.server.use(this.BASE_PATH, this.userRoutes.routes()); // Ruta de usuarios
     this.server.use(this.BASE_PATH, this.moduleRoutes.routes()); // Ruta de modulos
     this.log.initializer();

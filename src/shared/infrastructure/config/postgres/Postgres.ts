@@ -16,7 +16,7 @@ export class Postgres {
     database: `${process.env.POSTGRES_DB}`,
     synchronize: true,
     logging: true,
-    entities: [User, Module,  Rol],
+    entities: [User, Module, Rol],
     subscribers: [],
     migrations: [],
   });

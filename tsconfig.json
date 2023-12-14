@@ -1,19 +1,22 @@
 {
+  
   "compilerOptions": {
     "target": "es6",
     "module": "commonjs",
     "lib": [
       "es6"
     ],
+
     "allowJs": true,
+    "strictPropertyInitialization": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
     "outDir": "./dist",
     "baseUrl": "src",
     "strict": true,
     "noImplicitAny": true,
     "esModuleInterop": true,
     "resolveJsonModule": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
     "sourceMap": true,
 		"removeComments": true,
     "paths": {

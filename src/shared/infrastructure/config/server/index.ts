@@ -4,14 +4,27 @@ import cors, { CorsOptions, CorsOptionsDelegate } from 'cors';
 import helmet from 'helmet';
 import swaggerUi from 'swagger-ui-express';
 import YAML from 'yamljs';
-import { Routes } from './routes';
+// import { Routes } from './routes';
+import { UserRoutes } from './routes/user.routes';
+import { ModuleRoutes } from './routes/module.routes';
 import { WinstonLogger } from '../logger';
-import { Mongoose } from '../mongoose/Mongoose';
+import { Postgres } from '../postgres/Postgres';
+import 'reflect-metadata';
+import { RolRoutes } from './routes/rol.routes';
 
 class App {
   public server: Application;
-  public appRoutes: Routes = new Routes();
-  public database: Mongoose = new Mongoose();
+  // public appRoutes: Routes = new Routes();
+  public userRoutes: UserRoutes = new UserRoutes();
+  public rolRoutes:RolRoutes = new RolRoutes();
+    // implemetar rutas de rol ^
+    //                         |
+    //implementar rutas de module 
+  public moduleRoutes: ModuleRoutes = new ModuleRoutes();
+  // implemetar rutas de rol ^
+  //                         |
+  // implementar rutas de module
+  public database: Postgres = new Postgres();
   public log: WinstonLogger = new WinstonLogger();
   private BASE_PATH: string = process.env.BASE_PATH || '/api';
   private corsOptions: CorsOptions | CorsOptionsDelegate | undefined;
@@ -24,9 +37,9 @@ class App {
   private config(): void {
     if (process.env.NODE_ENV !== 'production') {
       this.server.use(
-        `${(this.BASE_PATH)}/docs`,
+        `${this.BASE_PATH}/docs`,
         swaggerUi.serve,
-        swaggerUi.setup(YAML.load('./docs/swagger.yaml'), { })
+        swaggerUi.setup(YAML.load('./docs/swagger.yaml'), {}),
       );
     }
     this.corsOptions = {
@@ -41,7 +54,11 @@ class App {
     this.server.use(helmet.noSniff());
     this.server.use(helmet.hidePoweredBy());
     this.server.use(helmet.frameguard({ action: 'deny' }));
-    this.server.use(this.BASE_PATH, this.appRoutes.routes());
+    // this.server.use(this.BASE_PATH, this.appRoutes.routes()); // Ruta general
+
+    this.server.use(this.BASE_PATH, this.rolRoutes.routes());// Ruta de usuarios
+    this.server.use(this.BASE_PATH, this.userRoutes.routes()); // Ruta de usuarios
+    this.server.use(this.BASE_PATH, this.moduleRoutes.routes()); // Ruta de modulos
     this.log.initializer();
     this.database.connection();
   }
@@ -50,6 +67,6 @@ class App {
 export default new App().server.listen(
   Number(process.env.PORTSERVER) || 3000,
   () => {
-    log.info(`Server listening port: ${process.env.PORTSERVER}`);
+    log.info(`Server listening port: ${process.env.PORTSERVER} `);
   },
 );

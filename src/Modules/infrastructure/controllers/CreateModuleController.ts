@@ -18,12 +18,13 @@ export class CreateModuleController implements IBaseController {
 
   run = async (req: Request, res: Resp): Promise<void> => {
     const id = randomUUID();
-    const { name, description } = req.body;
+    const { name, description, moduleStartDate } = req.body;
 
     // ====== Creacion de Module siguiendo la interfaz IModule ======
     const module: IModule = {
       id: Object.freeze(id),
       name,
+      moduleStartDate,
       description,
       created_at: new Date(),
       updated_at: new Date(),

@@ -18,7 +18,7 @@ export class Module extends BaseEntity {
   @Column({ length: 300 })
     description: string;
 
-  @Column({ length: 300 })
+  @Column({ type: 'timestamptz' })
     moduleStartDate: Date;
 
   @CreateDateColumn()

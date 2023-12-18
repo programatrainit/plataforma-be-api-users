@@ -19,7 +19,7 @@ export class CreateModuleController implements IBaseController {
   run = async (req: Request, res: Resp): Promise<void> => {
     const id = randomUUID();
     const { name, description, moduleStartDate } = req.body;
-    const parseStartDate = new Date(moduleStarDate);
+    const parseStartDate = new Date(moduleStartDate);
 
     // ====== Creacion de Module siguiendo la interfaz IModule ======
     const module: IModule = {

@@ -21,14 +21,14 @@ export class Postgres {
     migrations: [],
   });
 
-  constructor() {}
+  constructor() { }
 
   connection(): void {
     Postgres.db
       .initialize()
       .then(() => log.info(
         `Successfully connected to database:${Postgres.db.options.database} , type:${Postgres.db.options.type}  `,
-      ),)
+      ))
       // .then(() => console.log(`Successfully connected to ${this.db}`))
       .catch((error) => log.error('Error connecting to database: ', error));
   }

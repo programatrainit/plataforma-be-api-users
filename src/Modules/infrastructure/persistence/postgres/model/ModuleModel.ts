@@ -19,7 +19,7 @@ export class Module extends BaseEntity {
     description: string;
 
   @Column({ length: 300 })
-    moduleStartDate: string;
+    moduleStartDate: Date;
 
   @CreateDateColumn()
     created_at: Date;

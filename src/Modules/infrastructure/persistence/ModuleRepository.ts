@@ -2,14 +2,14 @@ import { TyOrmBaseRepository } from '../../../shared/infrastructure/persistence/
 import { ModuleWriteRepository } from '../../domain/repository/ModuleWriteRepository';
 import { ModuleReadRepository } from '../../domain/repository/ModuleReadRepository';
 import { IModule } from '../../domain/entity/IModule';
-
 export class ModuleRepository
+
   extends TyOrmBaseRepository
   implements ModuleWriteRepository, ModuleReadRepository {
   // falta por configurar el dto
   async createModule(body: IModule): Promise<string> {
     const response = await super.create<IModule, string>(body);
-    log.info(`funcion de user repository${response}`);
+    //log.info(`funcion de user repository${response}`);
     return response;
   }
 

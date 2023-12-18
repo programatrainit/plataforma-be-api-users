@@ -20,7 +20,7 @@ export class TyOrmBaseRepository implements Write, Read {
   create<T, V>(body: T): Promise<V> {
     return new Promise<V>((resolve, reject) => {
       if (body === undefined) {
-        log.error(`Database error is  ${body}`);
+        //log.error(`Database error is  ${body}`);
         reject(body);
       }
       // verificamos que el dato se que envio sea del que implemente las entidades
@@ -32,7 +32,7 @@ export class TyOrmBaseRepository implements Write, Read {
 
         resolve(this._createDto.messages as unknown as V);
       } else {
-        log.error(`Database error is  ${this._model}`);
+        // log.error(`Database error is  ${this._model}`);
         reject(body);
       }
     });

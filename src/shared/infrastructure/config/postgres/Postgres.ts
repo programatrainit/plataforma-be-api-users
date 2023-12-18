@@ -9,26 +9,26 @@ export class Postgres {
   // se modifico la variable db es static para poder utilizar el contexto de DataSource
   static db: DataSource = new DataSource({
     type: 'postgres',
-    host: 'localhost',
+    host: 'postgres',
     port: 5432,
     username: `${process.env.POSTGRES_USER}`,
     password: `${process.env.POSTGRES_PASSWORD}`,
     database: `${process.env.POSTGRES_DB}`,
     synchronize: true,
     logging: true,
-    entities: [User, Module,  Rol],
+    entities: [User, Module, Rol],
     subscribers: [],
     migrations: [],
   });
 
-  constructor() {}
+  constructor() { }
 
   connection(): void {
     Postgres.db
       .initialize()
       .then(() => log.info(
         `Successfully connected to database:${Postgres.db.options.database} , type:${Postgres.db.options.type}  `,
-      ),)
+      ))
       // .then(() => console.log(`Successfully connected to ${this.db}`))
       .catch((error) => log.error('Error connecting to database: ', error));
   }

@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import express, { Application } from 'express';
 import { urlencoded, json } from 'body-parser';
 import cors, { CorsOptions, CorsOptionsDelegate } from 'cors';
@@ -16,10 +17,10 @@ class App {
   public server: Application;
   // public appRoutes: Routes = new Routes();
   public userRoutes: UserRoutes = new UserRoutes();
-  public rolRoutes:RolRoutes = new RolRoutes();
-    // implemetar rutas de rol ^
-    //                         |
-    //implementar rutas de module 
+  public rolRoutes: RolRoutes = new RolRoutes();
+  // implemetar rutas de rol ^
+  //                         |
+  //implementar rutas de module
   public moduleRoutes: ModuleRoutes = new ModuleRoutes();
   // implemetar rutas de rol ^
   //                         |

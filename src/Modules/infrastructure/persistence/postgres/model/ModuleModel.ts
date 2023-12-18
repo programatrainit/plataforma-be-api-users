@@ -18,9 +18,9 @@ export class Module extends BaseEntity {
   @Column({ length: 300 })
   description: string;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ type: 'date' })
   created_at: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({ type: 'date' })
   updated_at: Date;
 }

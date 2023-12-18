@@ -52,7 +52,7 @@ export class TyOrmBaseRepository implements Write, Read {
           Postgres.db.getRepository(this._model).update(id || {}, body || {}).then();
           this._updateDTO = {
             updateUserId: id,
-            dateModified: new Date(),
+            dateModified: new Date().getFullYear() + "-" + new Date().getMonth() + "-" + new Date().getDate(),
           };
 
           resolve(this._updateDTO as unknown as V);
@@ -73,8 +73,9 @@ export class TyOrmBaseRepository implements Write, Read {
         const users: Promise<Array<ObjectLiteral>> = Postgres.db
           .getRepository(this._model)
           .find().then((data) => data);
+
         users.then((user) => resolve(user as Array<V>));
-        log.info('Database response: Find users');
+        // log.info('Database response: Find users');
         // resolve((users as unknown) as Array<V>);
         // log.error(`Database error ${err}`);
         // reject(err);
@@ -91,10 +92,11 @@ export class TyOrmBaseRepository implements Write, Read {
         const user: ObjectLiteral | null = Postgres.db
           .getRepository(this._model)
           .findOne({ where: { id } }).then((data) => data);
-        log.info(`variable de user with ${user}`);
+        //log.info(`variable de user with ${user}`);
 
         if (user !== null) {
-          log.info(`Database response with ${JSON.stringify(user)}`);
+          // log.info(`Database response with ${JSON.stringify(user)}`);
+
           resolve(user as V);
         } else {
           resolve(undefined);

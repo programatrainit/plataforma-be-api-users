@@ -7,16 +7,16 @@ import {
   PrimaryColumn,
 } from 'typeorm';
 
-@Entity()
+@Entity("Module")
 export class Module extends BaseEntity {
   @PrimaryColumn({ length: 100 })
-    id: string;
+  id: string;
 
   @Column({ length: 50 })
-    name: string;
+  name: string;
 
   @Column({ length: 300 })
-    description: string;
+  description: string;
 
   @Column({ type: 'timestamptz' })
     moduleStartDate: Date;
@@ -24,6 +24,7 @@ export class Module extends BaseEntity {
   @CreateDateColumn()
     created_at: Date;
 
-  @UpdateDateColumn()
-    updated_at: Date;
+
+  @UpdateDateColumn({ type: 'date' })
+  updated_at: Date;
 }

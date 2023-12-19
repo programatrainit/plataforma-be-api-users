@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import express, { Application } from 'express';
 import { urlencoded, json } from 'body-parser';
 import cors, { CorsOptions, CorsOptionsDelegate } from 'cors';
@@ -16,7 +17,11 @@ class App {
   public server: Application;
   // public appRoutes: Routes = new Routes();
   public userRoutes: UserRoutes = new UserRoutes();
+
+  //implementar rutas de module
+
   public rolRoutes:RolRoutes = new RolRoutes();
+
   public moduleRoutes: ModuleRoutes = new ModuleRoutes();
   
   public database: Postgres = new Postgres();

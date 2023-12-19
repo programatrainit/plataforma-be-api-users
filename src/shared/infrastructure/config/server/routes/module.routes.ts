@@ -13,6 +13,9 @@ import { IModuleFindOne } from '../../../../../Modules/application/use-case/inte
 import { IModuleFindAll } from '../../../../../Modules/application/use-case/interface/IModuleFindAll';
 import { IModuleUpdate } from '../../../../../Modules/application/use-case/interface/IModuleUpdate';
 import { Module } from '../../../../../Modules/infrastructure/persistence/postgres/model/ModuleModel';
+import { IModuleDelete } from '../../../../../Modules/application/use-case/interface/IModulleDelete';
+import { DeleteModuleUseCase } from '../../../../../Modules/application/use-case/DeleteModuleUseCases';
+import { DeleteModuleController } from '../../../../../Modules/infrastructure/controllers/DeleteModuleController';
 
 export class ModuleRoutes {
   public router: Router;
@@ -33,10 +36,15 @@ export class ModuleRoutes {
     this.moduleRepository
   );
 
+  private deleteModuleUseCase: IModuleDelete = new DeleteModuleUseCase(
+    this.moduleRepository,
+  );
+
   private createModuleController: CreateModuleController;
   private findAllModuleController: FindAllModuleController;
   private findOneModuleController: FindOneModuleController;
   private updateModuleController: UpdateModuleConstroller;
+  private deleteModuleController: DeleteModuleController;
 
   constructor() {
     this.router = Router();
@@ -52,13 +60,17 @@ export class ModuleRoutes {
     this.updateModuleController = new UpdateModuleConstroller(
       this.updateModuleUseCase
     );
+    this.deleteModuleController = new DeleteModuleController(
+      this.deleteModuleUseCase
+    );
   }
 
   public routes(): Router {
     this.router.post('/modules', this.createModuleController.run);
     this.router.get('/modules', this.findAllModuleController.run);
-    this.router.get('/modules/:id', this.findOneModuleController.run);
+    this.router.delete('/modules', this.deleteModuleController.run);
     this.router.put('/modules', this.updateModuleController.run);
+    this.router.get('/modules/:id', this.findOneModuleController.run);
 
     return this.router;
   }

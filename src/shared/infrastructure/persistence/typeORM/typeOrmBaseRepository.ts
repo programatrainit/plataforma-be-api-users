@@ -115,7 +115,7 @@ export class TyOrmBaseRepository implements Write, Read {
           const result: any = Postgres.db.getRepository(this._model).delete({ id }).then((data) => data);
 
           if (result?.affected === 0) {
-            log.info('No se encontró ningún registro con el ID especificado.');
+            //log.info('No se encontró ningún registro con el ID especificado.');
           } else {
             const deleted = `Registro con ID ${id} eliminado el ${new Date().toISOString()}`;
             resolve(deleted as string);

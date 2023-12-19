@@ -1,56 +1,53 @@
 
-import { IUser } from '../../../../src/Users/domain/entity/IUser';
-import { UsersRepository } from '../../../../src/Users/infrastructure/persistence/Postgres/UserRepository';
+import { IModule } from '../../../../src/Modules/domain/entity/IModule';
+import { ModuleRepository } from '../../../../src/Modules/infrastructure/persistence/ModuleRepository';
 import { BusinessErrorHandler } from '../../../../src/shared/domain/service/BusinessErrorHandler';
 import { Exception } from '../../../../src/shared/domain/service/Exception';
-import { CreateUserUseCase } from '../../../../src/Users/application/use-case/CreateUserUseCase';
-import { User } from '../../../../src/Users/infrastructure/persistence/Postgres/model/UserModel'
+import { CreateModuleUseCase } from '../../../../src/Modules/application/use-case/CreateModuleUseCase';
+import { Module } from '../../../../src/Modules/infrastructure/persistence/postgres/model/ModuleModel';
 
-jest.mock('../../../src/Users/infrastructure/persistence/Postgres/UserRepository.ts');
+jest.mock('../../../../src/Modules/infrastructure/persistence/ModuleRepository.ts');
 
-describe('RequestCreateMetricUseCase', () => {
-  const body: IUser = {
+describe('RequestCreateModuleUseCase', () => {
+
+  const body: IModule = {
     id: '123e4567-e89b-12d3-a456-426614174001',
-    nombre: 'Maria',
-    apellido: 'Gonzalez',
-    email: 'maria.Gonzalez@email.com',
-    cv_bucket_url: 'https://fake-s3-bucket.s3.amazonaws.com',
-    github_url: 'https://github.com/fakeuser',
-    linkedin_url: 'https://www.linkedin.com/in/fakeuser',
+    name: 'SISTEMAS',
+    description: " Parcticas para las persona de it  ",
+    moduleStartDate: new Date("2023-12-20"),
     created_at: new Date(),
     updated_at: new Date()
-
   }
-  const createUserRespose: string = 'record created successfully';
-  const userRepository = new UsersRepository(User);
-  const createUserUseCase = new CreateUserUseCase(userRepository);
+  const createModuleRespose: string = 'record created successfully';
+  const moduleRepository = new ModuleRepository(Module);
+  const createModuleUseCase = new CreateModuleUseCase(moduleRepository);
 
-  let mockUserRepository: jest.SpyInstance<Promise<string>, [typeof body]>;
+  let mockModuleRepository: jest.SpyInstance<Promise<string>, [typeof body]>;
 
   beforeEach(() => {
-    mockUserRepository = jest
-      .spyOn(userRepository, 'createUser')
-      .mockResolvedValue(createUserRespose);
+    mockModuleRepository = jest
+      .spyOn(moduleRepository, 'createModule')
+      .mockResolvedValue(createModuleRespose);
   });
 
   afterEach(() => {
-    mockUserRepository.mockRestore();
+    mockModuleRepository.mockRestore();
   });
 
-  test('create a new User', async () => {
-    const result = await createUserUseCase.create(body);
+  test('create a new Module', async () => {
+    const result = await createModuleUseCase.create(body);
     expect(result).toBeDefined();
-    expect(result).toEqual(createUserRespose);
-    expect(mockUserRepository).toHaveBeenCalled();
+    expect(result).toEqual(createModuleRespose);
+    expect(mockModuleRepository).toHaveBeenCalled();
     expect(result).not.toBe(null);
   });
 
   test('should return error if the create is not success', async () => {
-    jest.spyOn(createUserUseCase, 'create').mockImplementation(() => {
+    jest.spyOn(createModuleUseCase, 'create').mockImplementation(() => {
       throw BusinessErrorHandler.createException(new Error('throw error'));
     });
     try {
-      await createUserUseCase.create(undefined as unknown as IUser);
+      await createModuleUseCase.create(undefined as unknown as IModule);
     } catch (err: any) {
       expect(err).toBeInstanceOf(Exception);
       expect(err).toBeInstanceOf(Error);

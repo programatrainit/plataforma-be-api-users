@@ -5,7 +5,7 @@ import { Exception } from '../../../../src/shared/domain/service/Exception';
 import { CreateUserUseCase } from '../../../../src/Users/application/use-case/CreateUserUseCase';
 import { User } from '../../../../src/Users/infrastructure/persistence/Postgres/model/UserModel'
 
-jest.mock('../../../src/Users/infrastructure/persistence/Postgres/UserRepository.ts');
+jest.mock('../../../../src/Users/infrastructure/persistence/Postgres/UserRepository.ts');
 
 describe('RequestCreateMetricUseCase', () => {
   const body: IUser = {

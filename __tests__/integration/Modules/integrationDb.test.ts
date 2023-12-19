@@ -15,6 +15,7 @@ let body: IModule = {
   id: '123e4567-e89b-12d3-a456-426614174001',
   name: 'SISTEMAS',
   description: " Parcticas para las persona de it  ",
+  moduleStartDate: new Date("2023-12-20"),
   created_at: new Date(),
   updated_at: new Date()
 
@@ -48,8 +49,9 @@ describe('Module integration', () => {
     "id": "123e4567-e89b-12d3-a456-426614174001",
     "name": "SISTEMAS",
     "description": " Parcticas para las persona de it Back-end",
-    "created_at": "2023-12-18",
-    "updated_at": "2023-12-18"
+    "moduleStartDate": "2023-12-19",
+    "created_at": "2023-12-19",
+    "updated_at": "2023-12-19"
   }
 
 
@@ -58,8 +60,9 @@ describe('Module integration', () => {
       "id": "123e4567-e89b-12d3-a456-426614174001",
       "name": "SISTEMAS",
       "description": " Parcticas para las persona de it Back-end",
-      "created_at": "2023-12-18",
-      "updated_at": "2023-12-18"
+      "moduleStartDate": "2023-12-19",
+      "created_at": "2023-12-19",
+      "updated_at": "2023-12-19"
     }
   ]
   test('create a new module', async () => {

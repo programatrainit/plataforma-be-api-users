@@ -18,11 +18,11 @@ export class Module extends BaseEntity {
   @Column({ length: 300 })
   description: string;
 
-  @Column({ type: 'timestamptz' })
-    moduleStartDate: Date;
+  @Column({ type: 'date' })
+  moduleStartDate: Date;
 
-  @CreateDateColumn()
-    created_at: Date;
+  @CreateDateColumn({ type: 'date' })
+  created_at: Date;
 
 
   @UpdateDateColumn({ type: 'date' })

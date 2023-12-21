@@ -3,7 +3,7 @@ import { IUser } from '../../../../src/Users/domain/entity/IUser';
 import { UsersRepository } from '../../../../src/Users/infrastructure/persistence/Postgres/UserRepository';
 import { BusinessErrorHandler } from '../../../../src/shared/domain/service/BusinessErrorHandler';
 import { Exception } from '../../../../src/shared/domain/service/Exception';
-import { CreateUserUseCase } from '../../../../src/Users/application/use-case/CreateUserUseCase';
+import { CreateUserUseCase } from '../../../../src/Users/application/use-case/CreateUserUseCase'; 
 import { User } from '../../../../src/Users/infrastructure/persistence/Postgres/model/UserModel'
 
 jest.mock('../../../src/Users/infrastructure/persistence/Postgres/UserRepository.ts');

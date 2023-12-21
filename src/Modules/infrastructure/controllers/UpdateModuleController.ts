@@ -20,11 +20,13 @@ export class UpdateModuleConstroller implements IBaseController {
   @Response<any>(200, 'OK')
   @Response<{ error: string }>(503, 'SERVICE UNAVAILABLE')
     run = async (req: Request, res: Resp): Promise<void> => {
-      const { id, name, description, created_at } = req.body;
+      const { id, name, description,created_at ,moduleStartDate, status } = req.body;
       const userUpdate: IModule = {
         id,
         name,
         description,
+        moduleStartDate,
+        status,
         created_at,
         updated_at: new Date(),
       };

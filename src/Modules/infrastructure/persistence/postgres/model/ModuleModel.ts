@@ -7,7 +7,7 @@ import {
   PrimaryColumn,
 } from 'typeorm';
 
-@Entity("Module")
+@Entity("module")
 export class Module extends BaseEntity {
   @PrimaryColumn({ length: 100 })
   id: string;
@@ -17,6 +17,9 @@ export class Module extends BaseEntity {
 
   @Column({ length: 300 })
   description: string;
+
+  @Column()
+  status: boolean;
 
   @Column({ type: 'date' })
   moduleStartDate: Date;

@@ -7,7 +7,7 @@ import { Module } from '../../../../src/Modules/infrastructure/persistence/postg
 
 jest.mock('../../../../src/Modules/infrastructure/persistence/ModuleRepository.ts');
 
-describe('DeleteModuleUseCase', () => {
+describe('RequestDeleteModuleUseCase', () => {
   const moduleId = '123e4567-e89b-12d3-a456-426614174001';
   const deleteModuleRespose: string = 'record deleted successfully';
   const moduleRepository = new ModuleRepository(Module);

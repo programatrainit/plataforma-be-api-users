@@ -20,7 +20,7 @@ export class TyOrmBaseRepository implements Write, Read {
   create<T, V>(body: T): Promise<V> {
     return new Promise<V>((resolve, reject) => {
       if (body === undefined) {
-        log.error(`Database error is  ${body}`);
+        //log.error(`Database error is  ${body}`);
         reject(body);
       }
       // verificamos que el dato se que envio sea del que implemente las entidades
@@ -30,9 +30,9 @@ export class TyOrmBaseRepository implements Write, Read {
         // log.info(`Database response ${JSON.stringify(body)}`);
         this._createDto = { messages: 'record created successfully' };
 
-        resolve(this._createDto.messages as V);
+        resolve(this._createDto.messages as unknown as V);
       } else {
-        log.error(`Database error is  ${this._model}`);
+        // log.error(`Database error is  ${this._model}`);
         reject(body);
       }
     });
@@ -52,10 +52,10 @@ export class TyOrmBaseRepository implements Write, Read {
           Postgres.db.getRepository(this._model).update(id || {}, body || {}).then();
           this._updateDTO = {
             updateUserId: id,
-            dateModified: new Date(),
+            dateModified: new Date().getFullYear() + "-" + new Date().getMonth() + "-" + new Date().getDate(),
           };
 
-          resolve(this._updateDTO as V);
+          resolve(this._updateDTO as unknown as V);
         } else {
           log.error(`id does not exist ${id}`);
           reject(body);
@@ -73,8 +73,9 @@ export class TyOrmBaseRepository implements Write, Read {
         const users: Promise<Array<ObjectLiteral>> = Postgres.db
           .getRepository(this._model)
           .find().then((data) => data);
+
         users.then((user) => resolve(user as Array<V>));
-        log.info('Database response: Find users');
+        // log.info('Database response: Find users');
         // resolve((users as unknown) as Array<V>);
         // log.error(`Database error ${err}`);
         // reject(err);
@@ -91,10 +92,11 @@ export class TyOrmBaseRepository implements Write, Read {
         const user: ObjectLiteral | null = Postgres.db
           .getRepository(this._model)
           .findOne({ where: { id } }).then((data) => data);
-        log.info(`variable de user with ${user}`);
+        //log.info(`variable de user with ${user}`);
 
         if (user !== null) {
-          log.info(`Database response with ${JSON.stringify(user)}`);
+          // log.info(`Database response with ${JSON.stringify(user)}`);
+
           resolve(user as V);
         } else {
           resolve(undefined);
@@ -113,9 +115,9 @@ export class TyOrmBaseRepository implements Write, Read {
           const result: any = Postgres.db.getRepository(this._model).delete({ id }).then((data) => data);
 
           if (result?.affected === 0) {
-            log.info('No se encontró ningún registro con el ID especificado.');
+            //log.info('No se encontró ningún registro con el ID especificado.');
           } else {
-            const deleted = `Registro con ID ${id} eliminado el ${new Date().toISOString()}`;
+            const deleted = `Registro con ID ${id} eliminado el ${new Date().getFullYear() + "-" + new Date().getMonth() + "-" + new Date().getDate()}`;
             resolve(deleted as string);
           }
         } catch (error) {

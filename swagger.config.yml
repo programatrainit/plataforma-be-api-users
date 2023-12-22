@@ -1,5 +1,5 @@
 swagger:
-  name: "api-metrics"
+  name: "api-TrainitPlatform"
   description: ""
   license: MIT
   version: "1.0.0"
@@ -7,7 +7,9 @@ swagger:
   outputDirectory: ./docs
   outputFormat: OpenApi_3
   entryFile:
-    - ./src/**/controller/*
+    - ./src/Modules/infrastructure/controllers/*
+    - ./src/Users/infrastructure/controller/*
+    - ./src/Roles/infrastruture/controllers/*
   produces: [ controller/json ]
   securityDefinitions:
     Authenticator:

@@ -7,20 +7,27 @@ import {
   PrimaryColumn,
 } from 'typeorm';
 
-@Entity()
+@Entity("module")
 export class Module extends BaseEntity {
   @PrimaryColumn({ length: 100 })
-    id: string;
+  id: string;
 
   @Column({ length: 50 })
-    name: string;
+  name: string;
+
+  @Column()
+  status: boolean;
 
   @Column({ length: 300 })
-    description: string;
+  description: string;
 
-  @CreateDateColumn()
-    created_at: Date;
+  @Column({ type: 'date' })
+  moduleStartDate: Date;
 
-  @UpdateDateColumn()
-    updated_at: Date;
+  @CreateDateColumn({ type: 'date' })
+  created_at: Date;
+
+
+  @UpdateDateColumn({ type: 'date' })
+  updated_at: Date;
 }

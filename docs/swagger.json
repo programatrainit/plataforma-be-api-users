@@ -4,26 +4,40 @@
 		"license": {
 			"name": "MIT"
 		},
-		"title": "api-metrics",
+		"title": "api-TrainitPlatform",
 		"version": "1.0.0"
 	},
 	"paths": {
-		"/metrics": {
+		"/modules": {
 			"post": {
-				"operationId": "CreateMetricImpl",
+				"operationId": "CreateModuleImpl",
 				"responses": {
 					"200": {
-						"description": "OK",
+						"description": "Ok",
 						"content": {
+							"text/html": {
+								"schema": {
+									"type": "string"
+								}
+							},
 							"application/json": {
 								"schema": {
-									"type": "object",
-									"properties": {
-										"id": {
-											"type": "string",
-											"description": ""
-										}
-									}
+									"type": "string"
+								}
+							}
+						}
+					},
+					"201": {
+						"description": "CREATED",
+						"content": {
+							"text/html": {
+								"schema": {
+									"type": "string"
+								}
+							},
+							"application/json": {
+								"schema": {
+									"type": "string"
 								}
 							}
 						}
@@ -31,6 +45,17 @@
 					"503": {
 						"description": "SERVICE UNAVAILABLE",
 						"content": {
+							"text/html": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"error": {
+											"type": "string",
+											"description": ""
+										}
+									}
+								}
+							},
 							"application/json": {
 								"schema": {
 									"type": "object",
@@ -47,13 +72,13 @@
 				},
 				"description": "",
 				"tags": [
-					"Metrics"
+					"Modules"
 				],
 				"requestBody": {
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/IMetric"
+								"$ref": "#/components/schemas/IModule"
 							}
 						}
 					},
@@ -61,7 +86,7 @@
 				}
 			},
 			"get": {
-				"operationId": "FindAllMetricImpl",
+				"operationId": "FindAllModuleImpl",
 				"responses": {
 					"200": {
 						"description": "OK",
@@ -70,7 +95,7 @@
 								"schema": {
 									"type": "array",
 									"items": {
-										"$ref": "#/components/schemas/IMetric"
+										"$ref": "#/components/schemas/IModule"
 									}
 								}
 							}
@@ -95,8 +120,241 @@
 				},
 				"description": "",
 				"tags": [
-					"Metrics"
+					"findAllModules"
 				]
+			}
+		},
+		"/modules/": {
+			"delete": {
+				"operationId": "DeleteModuleImpl",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"text/html": {
+								"schema": {
+									"type": "string"
+								}
+							},
+							"application/json": {
+								"schema": {
+									"type": "string"
+								}
+							}
+						}
+					},
+					"201": {
+						"description": "Deleted",
+						"content": {
+							"text/html": {
+								"schema": {
+									"type": "string"
+								}
+							},
+							"application/json": {
+								"schema": {
+									"type": "string"
+								}
+							}
+						}
+					},
+					"503": {
+						"description": "SERVICE UNAVAILABLE",
+						"content": {
+							"text/html": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"error": {
+											"type": "string",
+											"description": ""
+										}
+									}
+								}
+							},
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"error": {
+											"type": "string",
+											"description": ""
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"description": "",
+				"tags": [
+					"Modules"
+				],
+				"requestBody": {
+					"$ref": "#/components/requestBodies/DeleteModuleImplId"
+				}
+			}
+		},
+		"/users": {
+			"post": {
+				"operationId": "CreateUserImpl",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"text/html": {
+								"schema": {
+									"type": "string"
+								}
+							},
+							"application/json": {
+								"schema": {
+									"type": "string"
+								}
+							}
+						}
+					},
+					"201": {
+						"description": "CREATED",
+						"content": {
+							"text/html": {
+								"schema": {
+									"type": "string"
+								}
+							},
+							"application/json": {
+								"schema": {
+									"type": "string"
+								}
+							}
+						}
+					},
+					"503": {
+						"description": "SERVICE UNAVAILABLE",
+						"content": {
+							"text/html": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"error": {
+											"type": "string",
+											"description": ""
+										}
+									}
+								}
+							},
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"error": {
+											"type": "string",
+											"description": ""
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"description": "",
+				"tags": [
+					"Users"
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IUser"
+							}
+						}
+					},
+					"required": true
+				}
+			},
+			"get": {
+				"operationId": "FindAllUserImpl",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/IUser"
+									}
+								}
+							}
+						}
+					},
+					"503": {
+						"description": "SERVICE UNAVAILABLE",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"error": {
+											"type": "string",
+											"description": ""
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"description": "",
+				"tags": [
+					"users"
+				]
+			}
+		},
+		"/users/{id}": {
+			"delete": {
+				"operationId": "DeleteUserImpl",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"succes": {
+											"type": "string",
+											"description": ""
+										}
+									}
+								}
+							}
+						}
+					},
+					"503": {
+						"description": "SERVICE UNAVAILABLE",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"error": {
+											"type": "string",
+											"description": ""
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"description": "",
+				"tags": [
+					"deleteUser"
+				],
+				"requestBody": {
+					"$ref": "#/components/requestBodies/DeleteModuleImplId"
+				}
 			}
 		}
 	},
@@ -106,6 +364,18 @@
 		}
 	],
 	"components": {
+		"requestBodies": {
+			"DeleteModuleImplId": {
+				"content": {
+					"application/json": {
+						"schema": {
+							"type": "string"
+						}
+					}
+				},
+				"required": true
+			}
+		},
 		"securitySchemes": {
 			"Authenticator": {
 				"type": "apiKey",
@@ -114,22 +384,105 @@
 			}
 		},
 		"schemas": {
-			"IMetric": {
+			"IModule": {
 				"description": "",
 				"properties": {
+					"id": {
+						"type": "string",
+						"description": ""
+					},
 					"name": {
 						"type": "string",
 						"description": ""
 					},
-					"value": {
+					"description": {
 						"type": "string",
+						"description": ""
+					},
+					"moduleStartDate": {
+						"type": "string",
+						"format": "date-time",
+						"description": ""
+					},
+					"created_at": {
+						"type": "string",
+						"format": "date-time",
+						"description": ""
+					},
+					"updated_at": {
+						"type": "string",
+						"format": "date-time",
+						"description": ""
+					},
+					"status": {
+						"type": "boolean",
 						"description": ""
 					}
 				},
 				"type": "object",
 				"required": [
+					"id",
 					"name",
-					"value"
+					"description",
+					"moduleStartDate",
+					"created_at",
+					"updated_at",
+					"status"
+				]
+			},
+			"IUser": {
+				"description": "",
+				"properties": {
+					"id": {
+						"type": "string",
+						"description": ""
+					},
+					"nombre": {
+						"type": "string",
+						"description": ""
+					},
+					"apellido": {
+						"type": "string",
+						"description": ""
+					},
+					"email": {
+						"type": "string",
+						"description": ""
+					},
+					"cv_bucket_url": {
+						"type": "string",
+						"description": ""
+					},
+					"github_url": {
+						"type": "string",
+						"description": ""
+					},
+					"linkedin_url": {
+						"type": "string",
+						"description": ""
+					},
+					"created_at": {
+						"type": "string",
+						"format": "date-time",
+						"description": ""
+					},
+					"updated_at": {
+						"type": "string",
+						"format": "date-time",
+						"description": ""
+					}
+				},
+				"type": "object",
+				"required": [
+					"id",
+					"nombre",
+					"apellido",
+					"email",
+					"cv_bucket_url",
+					"github_url",
+					"linkedin_url",
+					"created_at",
+					"updated_at"
 				]
 			}
 		}

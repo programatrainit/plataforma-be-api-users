@@ -1,7 +1,9 @@
 module.exports = {
   verbose: true,
   testEnvironment: 'node',
-  transform: { '^.+\\.ts?$': 'ts-jest' },
+  transform: {
+    '^.+\\.ts?$': 'ts-jest',
+  },
   globals: { NODE_ENV: 'test' },
   moduleNameMapper: {
     '^@repositories/(.*)$': '<rootDir>/src/repositories/$1',
@@ -12,5 +14,5 @@ module.exports = {
   },
   collectCoverage: true,
   coverageReporters: ['json', 'text'],
-  coverageDirectory: 'coverage/'
+  coverageDirectory: 'coverage/',
 };

@@ -3,6 +3,7 @@ import 'source-map-support/register';
 import { IModule } from '../../../src/Modules/domain/entity/IModule';
 import { ModuleRepository } from '../../../src/Modules/infrastructure/persistence/ModuleRepository';
 import { CreateModuleUseCase } from '../../../src/Modules/application/use-case/CreateModuleUseCase';
+import { DeleteModuleUseCase } from '../../../src/Modules/application/use-case/DeleteModuleUseCases';
 import { UpdateModuleUseCase } from '../../../src/Modules/application/use-case/UpdateModuleUseCase';
 import { FindAllModuleUseCase } from '../../../src/Modules/application/use-case/FindAllModuleUseCase';
 import { FindOneModuleUseCase } from '../../../src/Modules/application/use-case/FindOneModuleUseCase';
@@ -41,6 +42,7 @@ afterAll(async () => {
 describe('Module integration', () => {
   const idModule: string = "123e4567-e89b-12d3-a456-426614174001";
   const createModuleResponse: string = 'record created successfully';
+  const deleteModuleResponse: string = '¡Warning! record deleted successfully';
   const updateModuleResponse = {
     "updateUserId": "123e4567-e89b-12d3-a456-426614174001",
     "dateModified": new Date().getFullYear() + "-" + new Date().getMonth() + "-" + new Date().getDate(),
@@ -89,7 +91,7 @@ describe('Module integration', () => {
     expect(result).not.toBe(null);
   });
 
-  test('find e modules', async () => {
+  test('find all modules', async () => {
     const moduleRepository = new ModuleRepository(Module);
     const findAllModuleUseCase = new FindAllModuleUseCase(moduleRepository);
     const result = await findAllModuleUseCase.findAll();
@@ -106,5 +108,17 @@ describe('Module integration', () => {
     expect(result).toEqual(findOneModuleResponse);
     expect(result).not.toBe(null);
   });
+
+  test('delete a module', async () => {
+
+    const moduleRepository = new ModuleRepository(Module);
+    const deleteModuleUseCase = new DeleteModuleUseCase(moduleRepository);
+    const result = await deleteModuleUseCase.Delete(idModule);
+
+    expect(result).toBeDefined();
+    expect(result).toEqual(deleteModuleResponse);
+    expect(result).not.toBe(null);
+  });
+
 });
 

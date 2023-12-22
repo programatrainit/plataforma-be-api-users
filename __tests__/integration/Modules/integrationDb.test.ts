@@ -42,7 +42,7 @@ afterAll(async () => {
 describe('Module integration', () => {
   const idModule: string = "123e4567-e89b-12d3-a456-426614174001";
   const createModuleResponse: string = 'record created successfully';
-  const deleteModuleResponse: string = '¡Warning! record deleted successfully';
+  const deleteModuleResponse: string = "Registro con ID 123e4567-e89b-12d3-a456-426614174001 eliminado el 2023-11-21";
   const updateModuleResponse = {
     "updateUserId": "123e4567-e89b-12d3-a456-426614174001",
     "dateModified": new Date().getFullYear() + "-" + new Date().getMonth() + "-" + new Date().getDate(),
@@ -53,8 +53,9 @@ describe('Module integration', () => {
     "name": "SISTEMAS",
     "description": " Parcticas para las persona de it Back-end",
     "moduleStartDate": "2023-12-19",
-    "created_at": "2023-12-19",
-    "updated_at": "2023-12-19"
+    "status": true,
+    "created_at": "2023-12-21",
+    "updated_at": "2023-12-21"
   }
 
 
@@ -64,8 +65,9 @@ describe('Module integration', () => {
       "name": "SISTEMAS",
       "description": " Parcticas para las persona de it Back-end",
       "moduleStartDate": "2023-12-19",
-      "created_at": "2023-12-19",
-      "updated_at": "2023-12-19"
+      "status": true,
+      "created_at": "2023-12-21",
+      "updated_at": "2023-12-21"
     }
   ]
   test('create a new module', async () => {

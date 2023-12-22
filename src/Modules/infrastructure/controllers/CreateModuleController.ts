@@ -25,7 +25,8 @@ export class CreateModuleController implements IBaseController {
     const module: IModule = {
       id: Object.freeze(id),
       name,
-      moduleStartDate : parseStartDate,
+      status: true,
+      moduleStartDate: parseStartDate,
       description,
       created_at: new Date(),
       updated_at: new Date(),

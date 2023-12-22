@@ -19,23 +19,25 @@ export class UpdateModuleConstroller implements IBaseController {
   @Tags('Modules')
   @Response<any>(200, 'OK')
   @Response<{ error: string }>(503, 'SERVICE UNAVAILABLE')
-    run = async (req: Request, res: Resp): Promise<void> => {
-      const { id, name, description, created_at } = req.body;
-      const userUpdate: IModule = {
-        id,
-        name,
-        description,
-        created_at,
-        updated_at: new Date(),
-      };
-      const ID: string = userUpdate.id;
-      try {
-        const response = await this.impl(userUpdate, ID);
-        res.status(httpStatus.OK).json(response);
-      } catch (error) {
-        ErrorHandler.catch(error as Record<any, any>, res);
-      }
+  run = async (req: Request, res: Resp): Promise<void> => {
+    const { id, name, description, moduleStartDate, status, created_at } = req.body;
+    const userUpdate: IModule = {
+      id,
+      name,
+      description,
+      moduleStartDate,
+      status,
+      created_at,
+      updated_at: new Date(),
     };
+    const ID: string = userUpdate.id;
+    try {
+      const response = await this.impl(userUpdate, ID);
+      res.status(httpStatus.OK).json(response);
+    } catch (error) {
+      ErrorHandler.catch(error as Record<any, any>, res);
+    }
+  };
 
   protected async impl(body: IModule, id: string): Promise<object> {
     return this._useCase.Update(body, id);

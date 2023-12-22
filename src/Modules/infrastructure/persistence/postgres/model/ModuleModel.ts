@@ -7,13 +7,16 @@ import {
   PrimaryColumn,
 } from 'typeorm';
 
-@Entity("Module")
+@Entity("module")
 export class Module extends BaseEntity {
   @PrimaryColumn({ length: 100 })
   id: string;
 
   @Column({ length: 50 })
   name: string;
+
+  @Column()
+  status: boolean;
 
   @Column({ length: 300 })
   description: string;

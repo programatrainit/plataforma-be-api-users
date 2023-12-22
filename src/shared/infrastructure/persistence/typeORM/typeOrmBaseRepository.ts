@@ -117,7 +117,7 @@ export class TyOrmBaseRepository implements Write, Read {
           if (result?.affected === 0) {
             //log.info('No se encontró ningún registro con el ID especificado.');
           } else {
-            const deleted = `Registro con ID ${id} eliminado el ${new Date().toISOString()}`;
+            const deleted = `Registro con ID ${id} eliminado el ${new Date().getFullYear() + "-" + new Date().getMonth() + "-" + new Date().getDate()}`;
             resolve(deleted as string);
           }
         } catch (error) {

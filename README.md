@@ -1,4 +1,4 @@
-# API Metrics
+# API TrainitWeb
 ### A expressJS server application (NodeJS - Typescript) up [Docker](https://docker.com/) with Hexagonal Architecture.
 
 # Requirement

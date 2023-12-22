@@ -2,7 +2,8 @@ export interface IModule {
   id: string;
   name: string;
   description: string;
-  moduleStartDate:Date;
+  moduleStartDate: Date;
   created_at: Date;
   updated_at: Date;
+  status: boolean;
 }

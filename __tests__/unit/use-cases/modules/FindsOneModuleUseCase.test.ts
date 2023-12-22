@@ -6,26 +6,27 @@ import { Exception } from '../../../../src/shared/domain/service/Exception';
 import { FindOneModuleUseCase } from '../../../../src/Modules/application/use-case/FindOneModuleUseCase';
 import { Module } from '../../../../src/Modules/infrastructure/persistence/postgres/model/ModuleModel';
 
+
 jest.mock('../../../../src/Modules/infrastructure/persistence/ModuleRepository.ts');
 
-describe('RequestFindOneModuleUseCase', () => {
+describe('RequestFindAllModuleUseCase', () => {
 
 
-  let idFind: string = '123e4567-e89b-12d3-a456-426614174001';
-  const findOneModuleResponse =
-  {
+  const findOneModuleResponse = {
     id: '123e4567-e89b-12d3-a456-426614174001',
     name: 'SISTEMAS',
     description: " Parcticas para las persona de it  ",
     moduleStartDate: new Date("2023-12-20"),
+    status: true,
     created_at: new Date(),
     updated_at: new Date()
 
-  };
+  }
+  const id: string = '123e4567-e89b-12d3-a456-426614174001';
   const moduleRepository = new ModuleRepository(Module);
   const findOneModuleUseCase = new FindOneModuleUseCase(moduleRepository);
 
-  let mockModuleRepository: jest.SpyInstance<Promise<IModule>, [typeof idFind]>;
+  let mockModuleRepository: jest.SpyInstance<Promise<IModule>, [typeof id]>;
 
   beforeEach(() => {
     mockModuleRepository = jest
@@ -37,15 +38,15 @@ describe('RequestFindOneModuleUseCase', () => {
     mockModuleRepository.mockRestore();
   });
 
-  test('find one Modules', async () => {
-    const result = await findOneModuleUseCase.findOne(idFind);
+  test('find all Modules', async () => {
+    const result = await findOneModuleUseCase.findOne(id);
     expect(result).toBeDefined();
     expect(result).toEqual(findOneModuleResponse);
     expect(mockModuleRepository).toHaveBeenCalled();
     expect(result).not.toBe(null);
   });
 
-  test('should return error if the find one is not success', async () => {
+  test('returns error if search is unsuccessful', async () => {
     jest.spyOn(findOneModuleUseCase, 'findOne').mockImplementation(() => {
       throw BusinessErrorHandler.createException(new Error('throw error'));
     });

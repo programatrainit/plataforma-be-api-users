@@ -14,6 +14,7 @@ describe('RequestUpdateModuleUseCase', () => {
     name: 'SISTEMAS',
     description: " Parcticas para las persona de it , back-end",
     moduleStartDate: new Date("2023-12-20"),
+    status: true,
     created_at: new Date(),
     updated_at: new Date()
   }

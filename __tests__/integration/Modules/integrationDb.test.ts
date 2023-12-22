@@ -16,6 +16,7 @@ let body: IModule = {
   name: 'SISTEMAS',
   description: " Parcticas para las persona de it  ",
   moduleStartDate: new Date("2023-12-20"),
+  status: true,
   created_at: new Date(),
   updated_at: new Date()
 

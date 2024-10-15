@@ -36,7 +36,7 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
-  await Postgres.db.destroy();
+  await Postgres.db.destroy(); 
 })
 
 describe('Module integration', () => {
